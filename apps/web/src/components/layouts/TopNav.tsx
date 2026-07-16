@@ -56,8 +56,8 @@ export function TopNav() {
           <div 
             className="flex items-center gap-2 px-3 py-1.5 rounded-md border transition-all duration-200"
             style={{
-              backgroundColor: 'var(--surface-secondary)',
-              borderColor: 'var(--border)',
+              backgroundColor: 'var(--green-tint)',
+              borderColor: 'rgba(61, 155, 95, 0.20)',
             }}
           >
             <User className="h-4 w-4" style={{ color: 'var(--text-tertiary)' }} />
@@ -67,8 +67,8 @@ export function TopNav() {
             <span 
               className="text-xs px-1.5 py-0.5 rounded font-medium ml-1"
               style={{
-                backgroundColor: 'rgba(209, 184, 52, 0.15)',
-                color: 'var(--mustard)',
+                backgroundColor: 'rgba(61, 155, 95, 0.15)',
+                color: 'var(--green-medium)',
               }}
             >
               {user.role}

@@ -16,9 +16,9 @@ const iconMap = {
 };
 
 const priorityColorMap = {
-  low: { bg: 'rgba(109, 133, 23, 0.1)', text: 'var(--status-normal)', border: 'rgba(109, 133, 23, 0.2)' },
-  normal: { bg: 'rgba(209, 184, 52, 0.1)', text: 'var(--mustard)', border: 'rgba(209, 184, 52, 0.2)' },
-  high: { bg: 'rgba(198, 126, 27, 0.1)', text: 'var(--status-critical)', border: 'rgba(198, 126, 27, 0.2)' },
+  low: { bg: 'rgba(45, 122, 74, 0.10)', text: 'var(--status-normal)', border: 'rgba(45, 122, 74, 0.2)' },
+  normal: { bg: 'rgba(61, 155, 95, 0.10)', text: 'var(--green-medium)', border: 'rgba(61, 155, 95, 0.2)' },
+  high: { bg: 'rgba(217, 119, 6, 0.1)', text: 'var(--status-warning)', border: 'rgba(217, 119, 6, 0.2)' },
   critical: { bg: 'rgba(220, 38, 38, 0.1)', text: 'var(--status-error)', border: 'rgba(220, 38, 38, 0.3)' }
 };
 
@@ -131,7 +131,7 @@ export function NotificationCenter() {
               <button 
                 onClick={() => markAllAsRead(currentRole)}
                 className="text-xs font-semibold flex items-center gap-1 transition-colors duration-200"
-                style={{ color: 'var(--mustard)' }}
+                style={{ color: 'var(--green-primary)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
               >
@@ -193,7 +193,7 @@ export function NotificationCenter() {
                           {n.title}
                         </h4>
                         {!n.read && (
-                          <span className="w-1.5 h-1.5 rounded-full shrink-0 ml-1.5 mt-1" style={{ backgroundColor: 'var(--blue-primary)' }} />
+                          <span className="w-1.5 h-1.5 rounded-full shrink-0 ml-1.5 mt-1" style={{ backgroundColor: 'var(--green-primary)' }} />
                         )}
                       </div>
                       <p className="text-[11px] mt-0.5 leading-relaxed break-words" style={{ color: 'var(--text-tertiary)' }}>

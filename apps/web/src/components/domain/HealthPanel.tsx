@@ -58,7 +58,7 @@ export function HealthPanel() {
       case 'Connected': return { bg: 'var(--status-normal)', pulsing: false };
       case 'Degraded': return { bg: 'var(--status-active)', pulsing: false };
       case 'Reconnecting': return { bg: 'var(--status-active)', pulsing: true };
-      case 'Connecting': return { bg: 'var(--mustard)', pulsing: true };
+      case 'Connecting': return { bg: 'var(--green-light)', pulsing: true };
       case 'Disconnected': return { bg: 'var(--status-error)', pulsing: false };
       default: return { bg: 'var(--text-muted)', pulsing: false };
     }

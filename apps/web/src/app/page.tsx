@@ -18,13 +18,13 @@ export default function LandingPage() {
       <div 
         className="fixed top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-15"
         style={{ 
-          background: 'radial-gradient(circle, rgba(209, 184, 52, 0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(61, 155, 95, 0.12) 0%, transparent 70%)',
         }}
       />
       <div 
         className="fixed bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-10"
         style={{ 
-          background: 'radial-gradient(circle, rgba(109, 133, 23, 0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(45, 122, 74, 0.10) 0%, transparent 70%)',
         }}
       />
 
@@ -40,13 +40,13 @@ export default function LandingPage() {
         <Link href="/" className="flex items-center gap-3 transition-opacity duration-200 hover:opacity-85">
           <div 
             className="h-10 w-10 rounded-md flex items-center justify-center font-bold text-white text-lg"
-            style={{ backgroundColor: 'var(--mustard)' }}
+            style={{ backgroundColor: 'var(--green-primary)' }}
           >
             S
           </div>
           <div>
             <h1 className="text-base font-semibold" style={{ color: 'var(--foreground)' }}>Stadium Stan</h1>
-            <p className="text-[9px] uppercase tracking-widest font-bold font-mono" style={{ color: 'var(--mustard)' }}>v1.0</p>
+            <p className="text-[9px] uppercase tracking-widest font-bold font-mono" style={{ color: 'var(--green-primary)' }}>v1.0</p>
           </div>
         </Link>
 
@@ -73,9 +73,9 @@ export default function LandingPage() {
           <span 
             className="text-xs font-bold font-mono px-3 py-1.5 rounded-md uppercase tracking-wider border"
             style={{
-              backgroundColor: 'rgba(209, 184, 52, 0.1)',
-              borderColor: 'rgba(209, 184, 52, 0.3)',
-              color: 'var(--mustard)',
+              backgroundColor: 'rgba(61, 155, 95, 0.10)',
+              borderColor: 'rgba(61, 155, 95, 0.3)',
+              color: 'var(--green-primary)',
             }}
           >
             Autonomous Stadium Operations
@@ -104,8 +104,8 @@ export default function LandingPage() {
               borderColor: 'var(--border)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(109, 133, 23, 0.15)';
-              e.currentTarget.style.borderColor = 'rgba(109, 133, 23, 0.4)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(61, 155, 95, 0.15)';
+              e.currentTarget.style.borderColor = 'rgba(61, 155, 95, 0.4)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
@@ -118,9 +118,9 @@ export default function LandingPage() {
               <div 
                 className="h-12 w-12 rounded-md flex items-center justify-center mb-6 border"
                 style={{
-                  backgroundColor: 'rgba(109, 133, 23, 0.1)',
-                  borderColor: 'rgba(109, 133, 23, 0.3)',
-                  color: 'var(--olive)',
+                  backgroundColor: 'rgba(61, 155, 95, 0.10)',
+                  borderColor: 'rgba(61, 155, 95, 0.3)',
+                  color: 'var(--green-medium)',
                 }}
               >
                 <Users className="w-6 h-6" />
@@ -134,8 +134,8 @@ export default function LandingPage() {
               href="/fan"
               className="mt-6 w-full py-2.5 text-white font-medium rounded-md text-xs flex items-center justify-center gap-2 transition-all duration-200 border"
               style={{
-                backgroundColor: 'var(--olive)',
-                borderColor: 'var(--olive)',
+                backgroundColor: 'var(--green-medium)',
+                borderColor: 'var(--green-medium)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = '0.9';
@@ -156,8 +156,8 @@ export default function LandingPage() {
               borderColor: 'var(--border)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(209, 184, 52, 0.15)';
-              e.currentTarget.style.borderColor = 'rgba(209, 184, 52, 0.4)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(95, 184, 118, 0.15)';
+              e.currentTarget.style.borderColor = 'rgba(95, 184, 118, 0.4)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
@@ -170,9 +170,9 @@ export default function LandingPage() {
               <div 
                 className="h-12 w-12 rounded-md flex items-center justify-center mb-6 border"
                 style={{
-                  backgroundColor: 'rgba(209, 184, 52, 0.1)',
-                  borderColor: 'rgba(209, 184, 52, 0.3)',
-                  color: 'var(--mustard)',
+                  backgroundColor: 'rgba(95, 184, 118, 0.10)',
+                  borderColor: 'rgba(95, 184, 118, 0.3)',
+                  color: 'var(--green-light)',
                 }}
               >
                 <CheckCircle2 className="w-6 h-6" />
@@ -186,8 +186,8 @@ export default function LandingPage() {
               href="/volunteer-login"
               className="mt-6 w-full py-2.5 text-white font-medium rounded-md text-xs flex items-center justify-center gap-2 transition-all duration-200 border"
               style={{
-                backgroundColor: 'var(--mustard)',
-                borderColor: 'var(--mustard)',
+                backgroundColor: 'var(--green-light)',
+                borderColor: 'var(--green-light)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = '0.9';
@@ -208,8 +208,8 @@ export default function LandingPage() {
               borderColor: 'var(--border)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(109, 133, 23, 0.15)';
-              e.currentTarget.style.borderColor = 'rgba(109, 133, 23, 0.4)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(45, 122, 74, 0.15)';
+              e.currentTarget.style.borderColor = 'rgba(45, 122, 74, 0.4)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
@@ -222,9 +222,9 @@ export default function LandingPage() {
               <div 
                 className="h-12 w-12 rounded-md flex items-center justify-center mb-6 border"
                 style={{
-                  backgroundColor: 'rgba(109, 133, 23, 0.1)',
-                  borderColor: 'rgba(109, 133, 23, 0.3)',
-                  color: 'var(--olive)',
+                  backgroundColor: 'rgba(45, 122, 74, 0.10)',
+                  borderColor: 'rgba(45, 122, 74, 0.3)',
+                  color: 'var(--green-primary)',
                 }}
               >
                 <Cpu className="w-6 h-6" />
@@ -238,8 +238,8 @@ export default function LandingPage() {
               href="/login"
               className="mt-6 w-full py-2.5 text-white font-medium rounded-md text-xs flex items-center justify-center gap-2 transition-all duration-200 border"
               style={{
-                backgroundColor: 'var(--olive)',
-                borderColor: 'var(--olive)',
+                backgroundColor: 'var(--green-primary)',
+                borderColor: 'var(--green-primary)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = '0.9';

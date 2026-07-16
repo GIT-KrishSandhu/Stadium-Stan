@@ -42,7 +42,7 @@ export function Sidebar() {
         <div 
           className="h-8 w-8 rounded-md flex items-center justify-center font-bold text-sm flex-shrink-0"
           style={{ 
-            backgroundColor: 'var(--mustard)',
+            backgroundColor: 'var(--green-primary)',
             color: 'var(--white)'
           }}
         >
@@ -76,9 +76,9 @@ export function Sidebar() {
               style={
                 item.active && isActive
                   ? {
-                      backgroundColor: 'rgba(209, 184, 52, 0.08)',
+                      backgroundColor: 'rgba(61, 155, 95, 0.10)',
                       color: 'var(--foreground)',
-                      borderLeft: '3px solid var(--mustard)',
+                      borderLeft: '3px solid var(--green-primary)',
                       paddingLeft: 'calc(0.75rem - 3px)',
                     }
                   : item.active
@@ -97,8 +97,8 @@ export function Sidebar() {
                 <span 
                   className="ml-auto text-xs px-1.5 py-0.5 rounded"
                   style={{
-                    backgroundColor: 'var(--status-low)',
-                    color: '#3F5B0B',
+                    backgroundColor: 'var(--green-pale)',
+                    color: 'var(--green-primary)',
                     fontSize: '0.65rem',
                     fontWeight: 500
                   }}

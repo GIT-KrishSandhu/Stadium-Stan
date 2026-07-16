@@ -47,7 +47,7 @@ export default function VolunteerLoginPage() {
         <div className="flex flex-col items-center mb-8">
           <div 
             className="mb-4 flex h-16 w-16 items-center justify-center rounded-md"
-            style={{ backgroundColor: 'var(--mustard)' }}
+            style={{ backgroundColor: 'var(--green-light)' }}
           >
             <span className="text-3xl font-bold text-white">V</span>
           </div>
@@ -90,8 +90,8 @@ export default function VolunteerLoginPage() {
                 color: 'var(--foreground)',
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--mustard)';
-                e.currentTarget.style.boxShadow = '0 0 0 2px rgba(209, 184, 52, 0.1)';
+                e.currentTarget.style.borderColor = 'var(--green-light)';
+                e.currentTarget.style.boxShadow = '0 0 0 2px rgba(95, 184, 118, 0.1)';
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = 'var(--border)';
@@ -107,9 +107,9 @@ export default function VolunteerLoginPage() {
             disabled={isLoading}
             className="mt-2 flex w-full items-center justify-center rounded-md px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200"
             style={{
-              background: isLoading ? 'rgba(209, 184, 52, 0.6)' : 'linear-gradient(180deg, var(--mustard) 0%, #C67E1B 100%)',
+              background: isLoading ? 'rgba(95, 184, 118, 0.6)' : 'linear-gradient(180deg, var(--green-light) 0%, var(--green-medium) 100%)',
               opacity: isLoading ? 0.7 : 1,
-              boxShadow: '0 2px 8px rgba(209, 184, 52, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 2px 8px rgba(95, 184, 118, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
             }}
             onMouseEnter={(e) => {
               if (!isLoading) e.currentTarget.style.opacity = '0.9';
@@ -126,11 +126,11 @@ export default function VolunteerLoginPage() {
         <div 
           className="mt-6 rounded-md p-4 flex gap-3 border"
           style={{
-            backgroundColor: 'rgba(209, 184, 52, 0.08)',
-            borderColor: 'rgba(209, 184, 52, 0.3)',
+            backgroundColor: 'rgba(95, 184, 118, 0.08)',
+            borderColor: 'rgba(95, 184, 118, 0.3)',
           }}
         >
-          <Info className="h-5 w-5 shrink-0 mt-0.5" style={{ color: 'var(--mustard)' }} />
+          <Info className="h-5 w-5 shrink-0 mt-0.5" style={{ color: 'var(--green-light)' }} />
           <div className="text-sm">
             <p className="font-semibold mb-1" style={{ color: 'var(--foreground)' }}>Demo Credentials</p>
             <p style={{ color: 'var(--text-secondary)' }}>
@@ -139,7 +139,7 @@ export default function VolunteerLoginPage() {
                 className="font-mono px-1.5 py-0.5 rounded text-xs"
                 style={{
                   backgroundColor: 'var(--surface-primary)',
-                  color: 'var(--mustard)',
+                  color: 'var(--green-light)',
                 }}
               >
                 volunteer1@stadiumstan.demo

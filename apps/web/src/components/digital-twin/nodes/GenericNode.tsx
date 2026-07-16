@@ -10,8 +10,8 @@ export const GenericNode = memo(({ data, selected }: NodeProps<any>) => {
       className="px-3 py-2 flex flex-col gap-1 rounded-md border backdrop-blur-sm transition-all duration-300 min-w-[140px] cursor-pointer group hover:shadow-lg"
       style={{
         backgroundColor: selected ? 'var(--surface-secondary)' : 'var(--surface-primary)',
-        borderColor: selected ? 'var(--mustard)' : 'var(--border)',
-        boxShadow: selected ? '0 0 20px rgba(209, 184, 52, 0.3)' : 'none',
+        borderColor: selected ? 'var(--green-primary)' : 'var(--border)',
+        boxShadow: selected ? '0 0 20px rgba(45, 122, 74, 0.3)' : 'none',
         transform: selected ? 'scale(1.08)' : 'scale(1)',
         zIndex: selected ? 50 : 1,
       }}
@@ -26,10 +26,10 @@ export const GenericNode = memo(({ data, selected }: NodeProps<any>) => {
         }
       }}
     >
-      <Handle type="target" position={Position.Top} style={{ backgroundColor: 'var(--olive)' }} />
+      <Handle type="target" position={Position.Top} style={{ backgroundColor: 'var(--green-medium)' }} />
       <HelpCircle className="w-3 h-3" style={{ color: 'var(--text-tertiary)' }} />
       <span style={{ color: 'var(--foreground)', fontSize: '0.75rem', fontWeight: 500 }}>{data.name}</span>
-      <Handle type="source" position={Position.Bottom} style={{ backgroundColor: 'var(--olive)' }} />
+      <Handle type="source" position={Position.Bottom} style={{ backgroundColor: 'var(--green-medium)' }} />
     </div>
   );
 });
