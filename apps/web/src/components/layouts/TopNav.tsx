@@ -67,8 +67,8 @@ export function TopNav() {
             <span 
               className="text-xs px-1.5 py-0.5 rounded font-medium ml-1"
               style={{
-                backgroundColor: 'rgba(0, 102, 255, 0.15)',
-                color: 'var(--blue-600)',
+                backgroundColor: 'rgba(209, 184, 52, 0.15)',
+                color: 'var(--mustard)',
               }}
             >
               {user.role}

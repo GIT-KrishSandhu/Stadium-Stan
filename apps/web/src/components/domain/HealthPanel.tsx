@@ -55,11 +55,11 @@ export function HealthPanel() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Connected': return { bg: 'var(--green-success)', pulsing: false };
-      case 'Degraded': return { bg: 'var(--amber-warning)', pulsing: false };
-      case 'Reconnecting': return { bg: 'var(--amber-warning)', pulsing: true };
-      case 'Connecting': return { bg: 'var(--blue-primary)', pulsing: true };
-      case 'Disconnected': return { bg: 'var(--red-incident)', pulsing: false };
+      case 'Connected': return { bg: 'var(--status-normal)', pulsing: false };
+      case 'Degraded': return { bg: 'var(--status-active)', pulsing: false };
+      case 'Reconnecting': return { bg: 'var(--status-active)', pulsing: true };
+      case 'Connecting': return { bg: 'var(--mustard)', pulsing: true };
+      case 'Disconnected': return { bg: 'var(--status-error)', pulsing: false };
       default: return { bg: 'var(--text-muted)', pulsing: false };
     }
   };

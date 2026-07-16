@@ -34,9 +34,9 @@ export const MedicalNode = memo(({ data, selected }: NodeProps<any>) => {
         }
       }}
     >
-      <Handle type="target" position={Position.Left} style={{ backgroundColor: 'var(--graphite-400)' }} />
+      <Handle type="target" position={Position.Left} style={{ backgroundColor: 'var(--olive)' }} />
       <Cross className="w-5 h-5" style={{ color: 'var(--red-incident)' }} />
-      <Handle type="source" position={Position.Right} style={{ backgroundColor: 'var(--graphite-400)' }} />
+      <Handle type="source" position={Position.Right} style={{ backgroundColor: 'var(--olive)' }} />
     </div>
   );
 });

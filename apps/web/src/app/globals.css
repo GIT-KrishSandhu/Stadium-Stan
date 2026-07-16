@@ -1,50 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  /* Base Colors - Deep Navy & Graphite */
-  --navy-950: #0f1621;
-  --navy-900: #1a2332;
-  --graphite-800: #2d3748;
-  --graphite-700: #3a4556;
-  --graphite-600: #4a5568;
-  --graphite-500: #5a6a7a;
-  --graphite-400: #7a8a9a;
-  --graphite-300: #9aa9ba;
-  --graphite-200: #c4cdd5;
-  --graphite-100: #e8eef5;
-  --white: #ffffff;
+  /* Warm Palette - Premium Stadium Operations Theme */
+  --cream-bright: #FCEA8C;
+  --gold-warm: #F2D16C;
+  --mustard: #D1B834;
+  --olive: #6D8517;
+  --olive-dark: #3F5B0B;
+  --white: #FFFFFF;
+  --off-white: #F9F8F5;
 
-  /* Semantic Colors */
-  --blue-primary: #0066ff;
-  --blue-600: #1a7eff;
-  --blue-500: #3391ff;
-  --green-success: #10b981;
-  --amber-warning: #f59e0b;
-  --red-incident: #ef4444;
-  --purple-ai: #a78bfa;
+  /* Neutrals - Light Theme */
+  --warm-gray-50: #FEFDFB;
+  --warm-gray-100: #F5F3F0;
+  --warm-gray-200: #EBE8E3;
+  --warm-gray-300: #DDD8D0;
+  --warm-gray-600: #7A7268;
+  --warm-gray-700: #4A4741;
+  --warm-gray-800: #1A1815;
 
-  /* Surface Colors */
-  --background: var(--navy-950);
-  --surface-primary: var(--navy-900);
-  --surface-secondary: var(--graphite-800);
-  --surface-tertiary: var(--graphite-700);
-  --border: var(--graphite-700);
-  --border-subtle: var(--graphite-800);
+  /* Semantic Status Colors */
+  --status-normal: #6D8517;
+  --status-low: #F2D16C;
+  --status-active: #D1B834;
+  --status-critical: #C67E1B;
+  --status-success: #10b981;
+  --status-error: #dc2626;
 
-  /* Text Colors */
-  --foreground: var(--graphite-100);
-  --text-secondary: var(--graphite-300);
-  --text-tertiary: var(--graphite-400);
-  --text-muted: var(--graphite-500);
+  /* Surface Colors - Light Theme */
+  --background: var(--off-white);
+  --surface-primary: var(--white);
+  --surface-secondary: var(--warm-gray-50);
+  --surface-tertiary: var(--warm-gray-100);
+  --border: var(--warm-gray-200);
+  --border-subtle: var(--warm-gray-100);
+
+  /* Text Colors - Light Theme */
+  --foreground: var(--warm-gray-800);
+  --text-secondary: var(--warm-gray-700);
+  --text-tertiary: var(--warm-gray-600);
+  --text-muted: #A89F95;
 
   /* Interactive States */
-  --hover-overlay: rgba(255, 255, 255, 0.05);
-  --focus-ring: var(--blue-primary);
-  --disabled: var(--graphite-500);
+  --hover-overlay: rgba(109, 133, 23, 0.05);
+  --focus-ring: var(--mustard);
+  --disabled: #A89F95;
 
   /* Stadium Accent Elements */
-  --field-line: rgba(0, 102, 255, 0.1);
-  --tactical-overlay: rgba(10, 185, 129, 0.08);
+  --field-line: rgba(109, 133, 23, 0.08);
+  --tactical-overlay: rgba(209, 184, 52, 0.08);
 }
 
 @theme inline {
@@ -90,21 +94,23 @@ body {
 
 /* Surface & Card Styling */
 .surface {
-  background: var(--surface-secondary);
+  background: linear-gradient(135deg, var(--surface-primary) 0%, rgba(255, 255, 255, 0.95) 100%);
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .surface-elevated {
-  background: var(--surface-secondary);
+  background: linear-gradient(135deg, var(--surface-primary) 0%, rgba(255, 255, 255, 0.95) 100%);
   border: 1px solid var(--border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 0.75rem;
 }
 
 .surface-interactive:hover {
-  background: var(--surface-tertiary);
-  border-color: var(--graphite-600);
+  background: var(--surface-secondary);
+  border-color: var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 /* Border Utilities */
@@ -133,6 +139,74 @@ body {
 
 .tactical-overlay {
   background: linear-gradient(135deg, var(--tactical-overlay) 0%, transparent 100%);
+}
+
+/* Button Styling */
+.btn-primary {
+  background: linear-gradient(180deg, var(--mustard) 0%, #C67E1B 100%);
+  color: var(--white);
+  font-weight: 600;
+  border: none;
+  border-radius: 0.625rem;
+  padding: 0.625rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(209, 184, 52, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 200ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(209, 184, 52, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, #C67E1B 0%, #A85E15 100%);
+}
+
+.btn-secondary {
+  background: var(--olive);
+  color: var(--white);
+  font-weight: 600;
+  border: none;
+  border-radius: 0.625rem;
+  padding: 0.625rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(109, 133, 23, 0.25);
+  transition: all 200ms ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(109, 133, 23, 0.35);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--olive);
+  font-weight: 600;
+  border: none;
+  border-radius: 0.625rem;
+  padding: 0.625rem 1.5rem;
+  transition: all 200ms ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(109, 133, 23, 0.08);
+}
+
+.btn-danger {
+  background: var(--status-error);
+  color: var(--white);
+  font-weight: 600;
+  border: none;
+  border-radius: 0.625rem;
+  padding: 0.625rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
+  transition: all 200ms ease;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.35);
 }
 
 /* Focus & Active States */
@@ -184,7 +258,7 @@ button, a, [role="button"] {
   inset: 0;
   background: linear-gradient(
     45deg,
-    rgba(0, 102, 255, 0.1) 0%,
+    rgba(209, 184, 52, 0.08) 0%,
     transparent 50%
   );
   border-radius: inherit;

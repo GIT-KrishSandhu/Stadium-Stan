@@ -16,10 +16,10 @@ const iconMap = {
 };
 
 const priorityColorMap = {
-  low: { bg: 'rgba(90, 106, 122, 0.1)', text: 'var(--text-muted)', border: 'rgba(90, 106, 122, 0.2)' },
-  normal: { bg: 'rgba(0, 102, 255, 0.1)', text: 'var(--blue-primary)', border: 'rgba(0, 102, 255, 0.2)' },
-  high: { bg: 'rgba(245, 158, 11, 0.1)', text: 'var(--amber-warning)', border: 'rgba(245, 158, 11, 0.2)' },
-  critical: { bg: 'rgba(239, 68, 68, 0.1)', text: 'var(--red-incident)', border: 'rgba(239, 68, 68, 0.3)' }
+  low: { bg: 'rgba(109, 133, 23, 0.1)', text: 'var(--status-normal)', border: 'rgba(109, 133, 23, 0.2)' },
+  normal: { bg: 'rgba(209, 184, 52, 0.1)', text: 'var(--mustard)', border: 'rgba(209, 184, 52, 0.2)' },
+  high: { bg: 'rgba(198, 126, 27, 0.1)', text: 'var(--status-critical)', border: 'rgba(198, 126, 27, 0.2)' },
+  critical: { bg: 'rgba(220, 38, 38, 0.1)', text: 'var(--status-error)', border: 'rgba(220, 38, 38, 0.3)' }
 };
 
 export function NotificationCenter() {
@@ -131,7 +131,7 @@ export function NotificationCenter() {
               <button 
                 onClick={() => markAllAsRead(currentRole)}
                 className="text-xs font-semibold flex items-center gap-1 transition-colors duration-200"
-                style={{ color: 'var(--blue-primary)' }}
+                style={{ color: 'var(--mustard)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
               >

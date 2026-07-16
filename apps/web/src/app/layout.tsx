@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`} style={{ backgroundColor: 'var(--navy-950)', color: 'var(--graphite-100)' }}>
-      <body className="min-h-full" style={{ backgroundColor: 'var(--navy-950)' }}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} style={{ backgroundColor: 'var(--off-white)', color: 'var(--warm-gray-800)' }}>
+      <body className="min-h-full bg-background text-foreground">
         <QueryProvider>
           <ErrorBoundary name="Global App">
             {children}

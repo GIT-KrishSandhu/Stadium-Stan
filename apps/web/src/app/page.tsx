@@ -12,19 +12,19 @@ export default function LandingPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'scenario' | 'stack'>('overview');
 
   return (
-    <div className="flex flex-col min-h-screen overflow-y-auto" style={{ backgroundColor: 'var(--navy-950)', color: 'var(--foreground)' }}>
+    <div className="flex flex-col min-h-screen overflow-y-auto" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
       
       {/* Subtle Stadium Accent Background */}
       <div 
-        className="fixed top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-30"
+        className="fixed top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-15"
         style={{ 
-          background: 'radial-gradient(circle, rgba(0, 102, 255, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(209, 184, 52, 0.1) 0%, transparent 70%)',
         }}
       />
       <div 
-        className="fixed bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-20"
+        className="fixed bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-10"
         style={{ 
-          background: 'radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(109, 133, 23, 0.08) 0%, transparent 70%)',
         }}
       />
 
@@ -40,13 +40,13 @@ export default function LandingPage() {
         <Link href="/" className="flex items-center gap-3 transition-opacity duration-200 hover:opacity-85">
           <div 
             className="h-10 w-10 rounded-md flex items-center justify-center font-bold text-white text-lg"
-            style={{ backgroundColor: 'var(--blue-primary)' }}
+            style={{ backgroundColor: 'var(--mustard)' }}
           >
             S
           </div>
           <div>
             <h1 className="text-base font-semibold" style={{ color: 'var(--foreground)' }}>Stadium Stan</h1>
-            <p className="text-[9px] uppercase tracking-widest font-bold font-mono" style={{ color: 'var(--blue-600)' }}>v1.0</p>
+            <p className="text-[9px] uppercase tracking-widest font-bold font-mono" style={{ color: 'var(--mustard)' }}>v1.0</p>
           </div>
         </Link>
 
@@ -73,9 +73,9 @@ export default function LandingPage() {
           <span 
             className="text-xs font-bold font-mono px-3 py-1.5 rounded-md uppercase tracking-wider border"
             style={{
-              backgroundColor: 'rgba(0, 102, 255, 0.1)',
-              borderColor: 'rgba(0, 102, 255, 0.3)',
-              color: 'var(--blue-primary)',
+              backgroundColor: 'rgba(209, 184, 52, 0.1)',
+              borderColor: 'rgba(209, 184, 52, 0.3)',
+              color: 'var(--mustard)',
             }}
           >
             Autonomous Stadium Operations
@@ -104,8 +104,8 @@ export default function LandingPage() {
               borderColor: 'var(--border)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 102, 255, 0.15)';
-              e.currentTarget.style.borderColor = 'rgba(0, 102, 255, 0.4)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(109, 133, 23, 0.15)';
+              e.currentTarget.style.borderColor = 'rgba(109, 133, 23, 0.4)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
@@ -118,9 +118,9 @@ export default function LandingPage() {
               <div 
                 className="h-12 w-12 rounded-md flex items-center justify-center mb-6 border"
                 style={{
-                  backgroundColor: 'rgba(0, 102, 255, 0.1)',
-                  borderColor: 'rgba(0, 102, 255, 0.3)',
-                  color: 'var(--blue-primary)',
+                  backgroundColor: 'rgba(109, 133, 23, 0.1)',
+                  borderColor: 'rgba(109, 133, 23, 0.3)',
+                  color: 'var(--olive)',
                 }}
               >
                 <Users className="w-6 h-6" />
@@ -134,8 +134,8 @@ export default function LandingPage() {
               href="/fan"
               className="mt-6 w-full py-2.5 text-white font-medium rounded-md text-xs flex items-center justify-center gap-2 transition-all duration-200 border"
               style={{
-                backgroundColor: 'var(--blue-primary)',
-                borderColor: 'var(--blue-primary)',
+                backgroundColor: 'var(--olive)',
+                borderColor: 'var(--olive)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = '0.9';
@@ -156,8 +156,8 @@ export default function LandingPage() {
               borderColor: 'var(--border)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.15)';
-              e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(209, 184, 52, 0.15)';
+              e.currentTarget.style.borderColor = 'rgba(209, 184, 52, 0.4)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
@@ -170,9 +170,9 @@ export default function LandingPage() {
               <div 
                 className="h-12 w-12 rounded-md flex items-center justify-center mb-6 border"
                 style={{
-                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                  borderColor: 'rgba(16, 185, 129, 0.3)',
-                  color: 'var(--green-success)',
+                  backgroundColor: 'rgba(209, 184, 52, 0.1)',
+                  borderColor: 'rgba(209, 184, 52, 0.3)',
+                  color: 'var(--mustard)',
                 }}
               >
                 <CheckCircle2 className="w-6 h-6" />
@@ -186,8 +186,8 @@ export default function LandingPage() {
               href="/volunteer-login"
               className="mt-6 w-full py-2.5 text-white font-medium rounded-md text-xs flex items-center justify-center gap-2 transition-all duration-200 border"
               style={{
-                backgroundColor: 'var(--green-success)',
-                borderColor: 'var(--green-success)',
+                backgroundColor: 'var(--mustard)',
+                borderColor: 'var(--mustard)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = '0.9';
@@ -208,8 +208,8 @@ export default function LandingPage() {
               borderColor: 'var(--border)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(167, 139, 250, 0.15)';
-              e.currentTarget.style.borderColor = 'rgba(167, 139, 250, 0.4)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(109, 133, 23, 0.15)';
+              e.currentTarget.style.borderColor = 'rgba(109, 133, 23, 0.4)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
@@ -222,9 +222,9 @@ export default function LandingPage() {
               <div 
                 className="h-12 w-12 rounded-md flex items-center justify-center mb-6 border"
                 style={{
-                  backgroundColor: 'rgba(167, 139, 250, 0.1)',
-                  borderColor: 'rgba(167, 139, 250, 0.3)',
-                  color: 'var(--purple-ai)',
+                  backgroundColor: 'rgba(109, 133, 23, 0.1)',
+                  borderColor: 'rgba(109, 133, 23, 0.3)',
+                  color: 'var(--olive)',
                 }}
               >
                 <Cpu className="w-6 h-6" />
@@ -238,8 +238,8 @@ export default function LandingPage() {
               href="/login"
               className="mt-6 w-full py-2.5 text-white font-medium rounded-md text-xs flex items-center justify-center gap-2 transition-all duration-200 border"
               style={{
-                backgroundColor: 'var(--purple-ai)',
-                borderColor: 'var(--purple-ai)',
+                backgroundColor: 'var(--olive)',
+                borderColor: 'var(--olive)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = '0.9';

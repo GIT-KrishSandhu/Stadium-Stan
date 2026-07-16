@@ -6,11 +6,11 @@ import { TopNav } from './TopNav';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen w-full" style={{ backgroundColor: 'var(--navy-950)', color: 'var(--foreground)' }}>
+    <div className="flex min-h-screen w-full" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
       <Sidebar />
       <div className="flex flex-1 flex-col">
         <TopNav />
-        <main className="flex-1 p-6" style={{ backgroundColor: 'var(--navy-950)' }}>
+        <main className="flex-1 p-6" style={{ backgroundColor: 'var(--background)' }}>
           {children}
         </main>
         {/* Footer Status Strip - Operational Indicator */}
@@ -24,8 +24,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         >
           <span>System operational</span>
           <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full" style={{ backgroundColor: 'var(--green-success)' }} />
-            <span style={{ color: 'var(--green-success)' }}>All systems nominal</span>
+            <div className="h-2 w-2 rounded-full" style={{ backgroundColor: 'var(--status-normal)' }} />
+            <span style={{ color: 'var(--status-normal)' }}>All systems nominal</span>
           </div>
         </div>
       </div>
