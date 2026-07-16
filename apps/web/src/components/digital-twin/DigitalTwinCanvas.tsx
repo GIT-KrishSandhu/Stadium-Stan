@@ -40,13 +40,22 @@ function ConnectionIndicator() {
   if (isConnected) return null;
 
   return (
-    <div className="flex items-center justify-between w-full bg-red-950/80 border border-red-900/50 rounded-lg px-3 py-2 shadow-lg backdrop-blur text-xs animate-in slide-in-from-top-2 duration-300">
-      <div className="flex items-center gap-2 text-red-400">
-        <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+    <div 
+      className="flex items-center justify-between w-full rounded-lg px-3 py-2 shadow-lg backdrop-blur text-xs animate-in slide-in-from-top-2 duration-300 border"
+      style={{
+        backgroundColor: 'rgba(239, 68, 68, 0.08)',
+        borderColor: 'rgba(239, 68, 68, 0.2)',
+      }}
+    >
+      <div className="flex items-center gap-2" style={{ color: 'var(--red-incident)' }}>
+        <div 
+          className="w-2 h-2 rounded-full animate-pulse"
+          style={{ backgroundColor: 'var(--red-incident)' }}
+        />
         <span className="font-medium">Disconnected</span>
       </div>
       {reconnectAttempts > 0 && (
-        <span className="text-red-500/70">Reconnecting... ({reconnectAttempts})</span>
+        <span style={{ color: 'var(--red-incident)', opacity: 0.7 }}>Reconnecting... ({reconnectAttempts})</span>
       )}
     </div>
   );
@@ -127,9 +136,15 @@ export function DigitalTwinCanvas() {
 
   if (!isLoaded) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-950 text-gray-400">
+      <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: 'var(--background)', color: 'var(--text-secondary)' }}>
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin" />
+          <div 
+            className="w-8 h-8 border-4 rounded-full animate-spin"
+            style={{
+              borderColor: 'rgba(0, 102, 255, 0.2)',
+              borderTopColor: 'var(--blue-primary)',
+            }}
+          />
           <span>Synchronizing Digital Twin Topology...</span>
         </div>
       </div>
@@ -137,7 +152,7 @@ export function DigitalTwinCanvas() {
   }
 
   return (
-    <div className="w-full h-full bg-gray-950 relative">
+    <div className="w-full h-full relative" style={{ backgroundColor: 'var(--background)' }}>
       <CommandPalette 
         isOpen={isCommandPaletteOpen} 
         onClose={() => setIsCommandPaletteOpen(false)} 
@@ -146,13 +161,33 @@ export function DigitalTwinCanvas() {
         <ConnectionIndicator />
         <button 
           onClick={() => setIsCommandPaletteOpen(true)}
-          className="w-full flex items-center justify-between bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-400 hover:text-white hover:border-gray-600 shadow-lg backdrop-blur transition-colors"
+          className="w-full flex items-center justify-between border rounded-lg px-4 py-2 text-sm shadow-lg backdrop-blur transition-colors"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+            color: 'var(--text-secondary)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--text-secondary)';
+            e.currentTarget.style.color = 'var(--foreground)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--border)';
+            e.currentTarget.style.color = 'var(--text-secondary)';
+          }}
         >
           <div className="flex items-center gap-2">
             <Search className="w-4 h-4" />
             <span>Search...</span>
           </div>
-          <kbd className="hidden sm:inline-block bg-gray-800 border border-gray-700 rounded px-1.5 py-0.5 text-[10px] font-mono text-gray-400">
+          <kbd 
+            className="hidden sm:inline-block border rounded px-1.5 py-0.5 text-[10px] font-mono"
+            style={{
+              backgroundColor: 'var(--surface-tertiary)',
+              borderColor: 'var(--border)',
+              color: 'var(--text-muted)',
+            }}
+          >
             ⌘K
           </kbd>
         </button>
@@ -171,21 +206,29 @@ export function DigitalTwinCanvas() {
         minZoom={0.1}
         maxZoom={4}
       >
-        <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="#334155" />
-        <Controls className="bg-gray-900 border-gray-800 fill-gray-400" />
+        <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="var(--graphite-600)" />
+        <Controls style={{ backgroundColor: 'var(--surface-secondary)', borderColor: 'var(--border)', fill: 'var(--text-secondary)' }} />
         <MiniMap 
           nodeColor={(n) => {
             const risk = n.data.riskScore as number || 0;
-            if (risk > 0.9) return '#ef4444';
-            if (risk > 0.75) return '#f97316';
-            if (risk > 0.5) return '#eab308';
-            return '#10b981';
+            if (risk > 0.9) return 'var(--red-incident)';
+            if (risk > 0.75) return 'var(--amber-warning)';
+            if (risk > 0.5) return 'var(--yellow-caution)';
+            return 'var(--green-success)';
           }}
           maskColor="rgba(15, 23, 42, 0.7)"
-          className="bg-gray-900 border border-gray-800"
+          style={{ backgroundColor: 'var(--surface-secondary)', borderColor: 'var(--border)' }}
         />
-        <Panel position="top-left" className="bg-gray-900/80 backdrop-blur border border-gray-800 p-2 rounded-lg shadow-lg">
-          <div className="text-xs font-medium text-gray-400 mb-2">Filters</div>
+        <Panel 
+          position="top-left" 
+          style={{
+            backgroundColor: 'rgba(var(--surface-secondary-rgb), 0.8)',
+            borderColor: 'var(--border)',
+            backdropFilter: 'blur(10px)',
+          }}
+          className="border p-2 rounded-lg shadow-lg"
+        >
+          <div className="text-xs font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Filters</div>
           <div className="flex flex-col gap-1">
             {Object.entries({
               Gates: 'showGates',
@@ -194,12 +237,20 @@ export function DigitalTwinCanvas() {
               Corridors: 'showCorridors',
               Elevators: 'showElevators'
             }).map(([label, key]) => (
-              <label key={key} className="flex items-center gap-2 text-xs text-gray-300">
+              <label 
+                key={key} 
+                className="flex items-center gap-2 text-xs cursor-pointer"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <input 
                   type="checkbox" 
                   checked={filters[key as keyof typeof filters] as boolean}
                   onChange={() => filters.toggleFilter(key as any)}
-                  className="rounded border-gray-700 bg-gray-800"
+                  style={{
+                    borderColor: 'var(--border)',
+                    backgroundColor: 'var(--surface-secondary)',
+                    accentColor: 'var(--blue-primary)',
+                  }}
                 />
                 {label}
               </label>
