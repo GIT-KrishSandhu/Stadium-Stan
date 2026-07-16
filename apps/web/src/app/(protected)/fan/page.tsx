@@ -11,8 +11,8 @@ import { useNotificationStore } from '../../../stores/notificationStore';
 import { useAuthStore } from '../../../stores/authStore';
 import { DigitalTwinView } from '../../../components/digital-twin/DigitalTwinView';
 import { NotificationCenter } from '../../../components/domain/NotificationCenter';
-import { 
-  MapPin, AlertTriangle, ShieldAlert, Navigation, PhoneCall, 
+import {
+  MapPin, AlertTriangle, ShieldAlert, Navigation, PhoneCall,
   Accessibility, HeartPulse, Clock, Sparkles, CheckCircle2, ChevronRight,
   Info, Users, LogOut, Calendar, Building2
 } from 'lucide-react';
@@ -24,11 +24,11 @@ export default function FanDashboard() {
   const { selectedNodeId, setSelectedNode, highlightedPath, setHighlightedPath } = useSelectionStore();
   const isConnected = useWebSocketStore(state => state.isConnected);
   const addNotification = useNotificationStore(state => state.addNotification);
-  
+
   // Set persona to 'fan' on load to route notifications correctly
   useEffect(() => {
     useAuthStore.getState().setAuth('fan-token', { email: 'fan@stadiumstan.demo', role: 'fan' });
-    
+
     // Clear path highlighting on mount
     setHighlightedPath([]);
   }, [setHighlightedPath]);
@@ -37,7 +37,7 @@ export default function FanDashboard() {
   const [startNode, setStartNode] = useState('');
   const [endNode, setEndNode] = useState('');
   const [routingType, setRoutingType] = useState<'shortest' | 'safest' | 'accessible'>('shortest');
-  
+
   // Incident submission states
   const [isReporting, setIsReporting] = useState(false);
   const [reportType, setReportType] = useState('medical_emergency');
@@ -84,7 +84,7 @@ export default function FanDashboard() {
   // Calculate wait time dynamically based on node state occupancy
   const getGateWaitTime = (gateNodeId: string) => {
     const nodeObj = nodes.find((n: any) => n.id === gateNodeId);
-    const occupancy = nodeObj?.occupancy || 150; 
+    const occupancy = nodeObj?.occupancy || 150;
     return Math.max(2, Math.round(occupancy / 20));
   };
 
@@ -155,7 +155,7 @@ export default function FanDashboard() {
       setIsReporting(false);
       setReportDetails('');
       queryClient.invalidateQueries({ queryKey: ['global_incidents'] });
-      
+
       addNotification({
         role: 'fan',
         type: 'operational',
@@ -201,7 +201,7 @@ export default function FanDashboard() {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gray-950 text-white">
-      
+
       {/* Top Banner Header */}
       <header className="flex h-16 w-full items-center justify-between border-b border-gray-800 bg-gray-900/60 px-6 shrink-0 backdrop-blur-md z-10">
         <Link href="/" className="flex items-center gap-3 hover:opacity-85 transition-opacity">
@@ -213,7 +213,7 @@ export default function FanDashboard() {
             <p className="text-[10px] text-blue-400 uppercase tracking-widest font-bold font-mono">Interactive Fan Portal</p>
           </div>
         </Link>
-        
+
         <div className="flex items-center gap-4 sm:gap-6">
           <div className="hidden sm:flex flex-col text-right">
             <span className="text-[10px] text-gray-500 font-bold uppercase">LIVE EVENT</span>
@@ -230,7 +230,7 @@ export default function FanDashboard() {
             </span>
           </div>
           <NotificationCenter />
-          <Link 
+          <Link
             href="/"
             className="p-1.5 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors border border-transparent"
             title="Return to Landing Page"
@@ -242,10 +242,10 @@ export default function FanDashboard() {
 
       {/* Main Grid Workspace */}
       <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-6 p-6">
-        
+
         {/* Left Side Panel: Info, Navigation, Assistance Forms (Spans 5 Columns) */}
         <div className="xl:col-span-5 flex flex-col gap-6 overflow-y-auto pr-2 pb-10">
-          
+
           {/* Live Alerts Marquee */}
           {activeAlerts.length > 0 && (
             <div className="bg-red-950/60 border border-red-900/50 text-red-200 px-4 py-3 text-xs font-bold flex items-center gap-3 rounded-2xl animate-pulse shrink-0">
@@ -269,7 +269,7 @@ export default function FanDashboard() {
                 <p className="text-xs text-gray-400 mt-1">July 15, 2026 • Kickoff 19:00 EST</p>
               </div>
             </div>
-            
+
             <div className="border-t border-gray-800/60 pt-4 flex gap-4">
               <div className="h-12 w-12 rounded-xl bg-purple-600/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
                 <Building2 className="w-6 h-6" />
@@ -287,14 +287,14 @@ export default function FanDashboard() {
             <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-gray-800 pb-3">
               <Users className="w-4 h-4 text-indigo-400" /> Entrance Gate Telemetry
             </h3>
-            
+
             <div className="flex flex-col gap-3">
               {gates.map((g: any) => {
                 const wait = getGateWaitTime(g.id);
                 const isSuggested = suggestedGate && suggestedGate.id === g.id;
                 return (
-                  <div 
-                    key={g.id} 
+                  <div
+                    key={g.id}
                     className={cn(
                       "flex justify-between items-center rounded-xl p-3 border transition-all",
                       isSuggested ? "bg-blue-950/20 border-blue-500/50 shadow-md shadow-blue-900/5" : "bg-gray-950/40 border-gray-800/60"
@@ -307,7 +307,7 @@ export default function FanDashboard() {
                       )} />
                       <div>
                         <span className="font-extrabold text-white text-sm flex items-center gap-1.5">
-                          {g.name} 
+                          {g.name}
                           {isSuggested && (
                             <span className="inline-flex items-center gap-0.5 text-[9px] bg-blue-500/20 border border-blue-500/30 text-blue-400 px-1.5 py-0.5 rounded font-extrabold tracking-widest uppercase">
                               <Sparkles className="w-2 h-2 fill-current" /> Suggested
@@ -323,8 +323,8 @@ export default function FanDashboard() {
                       ) : (
                         <span className={cn(
                           "text-xs font-mono font-bold px-2.5 py-1 rounded border",
-                          wait > 15 
-                            ? "bg-orange-950/40 text-orange-400 border-orange-900/30" 
+                          wait > 15
+                            ? "bg-orange-950/40 text-orange-400 border-orange-900/30"
                             : "bg-emerald-950/40 text-emerald-400 border-emerald-900/30"
                         )}>
                           {wait} min wait
@@ -350,7 +350,7 @@ export default function FanDashboard() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1">
                   <label className="text-[10px] text-gray-500 uppercase font-bold">Start Location</label>
-                  <select 
+                  <select
                     value={startNode}
                     onChange={(e) => setStartNode(e.target.value)}
                     className="bg-gray-950 border border-gray-800 rounded-lg p-2 text-xs text-white outline-none focus:border-blue-500 transition-colors"
@@ -364,7 +364,7 @@ export default function FanDashboard() {
                 </div>
                 <div className="flex flex-col gap-1">
                   <label className="text-[10px] text-gray-500 uppercase font-bold">Destination</label>
-                  <select 
+                  <select
                     value={endNode}
                     onChange={(e) => setEndNode(e.target.value)}
                     className="bg-gray-950 border border-gray-800 rounded-lg p-2 text-xs text-white outline-none focus:border-blue-500 transition-colors"
@@ -387,8 +387,8 @@ export default function FanDashboard() {
                     onClick={() => setRoutingType(type)}
                     className={cn(
                       "flex-1 py-1.5 rounded-lg border text-[11px] font-bold uppercase transition-all",
-                      routingType === type 
-                        ? "bg-blue-600/10 border-blue-500 text-blue-400" 
+                      routingType === type
+                        ? "bg-blue-600/10 border-blue-500 text-blue-400"
                         : "bg-transparent border-gray-800 text-gray-400 hover:border-gray-700"
                     )}
                   >
@@ -402,7 +402,7 @@ export default function FanDashboard() {
                 disabled={calculateRouteMutation.isPending || !startNode || !endNode}
                 className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2 mt-2 shadow-lg shadow-blue-900/10"
               >
-                {calculateRouteMutation.isPending ? 'Calculating...' : 'Generate Safest Route'}
+                {calculateRouteMutation.isPending ? 'Calculating...' : 'Generate Route'}
               </button>
             </form>
 
@@ -415,7 +415,7 @@ export default function FanDashboard() {
                     <Clock className="w-3.5 h-3.5" /> ~{calculateRouteMutation.data.route?.estimated_time_mins || 5} mins
                   </span>
                 </div>
-                
+
                 <p className="text-xs text-gray-300 leading-relaxed font-semibold italic">
                   "{calculateRouteMutation.data.communication?.fan_message}"
                 </p>
@@ -430,8 +430,8 @@ export default function FanDashboard() {
                     </React.Fragment>
                   ))}
                 </div>
-                
-                <button 
+
+                <button
                   onClick={() => {
                     setHighlightedPath([]);
                     setStartNode('');
@@ -454,7 +454,7 @@ export default function FanDashboard() {
 
             {/* Quick Actions */}
             <div className="grid grid-cols-2 gap-3">
-              <button 
+              <button
                 onClick={() => quickReport('medical_emergency', 'Medical Help')}
                 className="p-3 bg-red-950/20 hover:bg-red-950/40 border border-red-900/30 hover:border-red-900/50 rounded-xl flex items-center gap-2.5 transition-all text-left group cursor-pointer"
               >
@@ -467,7 +467,7 @@ export default function FanDashboard() {
                 </div>
               </button>
 
-              <button 
+              <button
                 onClick={() => quickReport('security_issue', 'Security Alert')}
                 className="p-3 bg-orange-950/20 hover:bg-orange-950/40 border border-orange-900/30 hover:border-orange-900/50 rounded-xl flex items-center gap-2.5 transition-all text-left group cursor-pointer"
               >
@@ -480,7 +480,7 @@ export default function FanDashboard() {
                 </div>
               </button>
 
-              <button 
+              <button
                 onClick={() => quickReport('accessibility_assistance', 'Accessibility')}
                 className="p-3 bg-blue-950/20 hover:bg-blue-950/40 border border-blue-900/30 hover:border-blue-900/50 rounded-xl flex items-center gap-2.5 transition-all text-left group cursor-pointer"
               >
@@ -493,7 +493,7 @@ export default function FanDashboard() {
                 </div>
               </button>
 
-              <button 
+              <button
                 onClick={() => quickReport('crowd_congestion', 'Overcrowding')}
                 className="p-3 bg-yellow-950/20 hover:bg-yellow-950/40 border border-yellow-900/30 hover:border-yellow-900/50 rounded-xl flex items-center gap-2.5 transition-all text-left group cursor-pointer"
               >
@@ -518,7 +518,7 @@ export default function FanDashboard() {
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-col gap-1">
                     <label className="text-[10px] text-gray-500 uppercase font-bold">Assistance Type</label>
-                    <select 
+                    <select
                       value={reportType}
                       onChange={e => setReportType(e.target.value)}
                       className="bg-gray-900 border border-gray-800 rounded p-1.5 text-xs text-white outline-none focus:border-red-500"
@@ -533,18 +533,18 @@ export default function FanDashboard() {
 
                   <div className="relative">
                     <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Select Nearest Node Location</label>
-                    <div 
+                    <div
                       onClick={() => setIsReportDropdownOpen(!isReportDropdownOpen)}
                       className="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-white text-xs cursor-pointer flex justify-between items-center"
                     >
                       <span className="truncate">{selectedReportNodeObj ? `${selectedReportNodeObj.name} (${selectedReportNodeObj.node_type})` : 'Select location node...'}</span>
                       <span className="text-gray-500 text-[10px]">▼</span>
                     </div>
-                    
+
                     {isReportDropdownOpen && (
                       <div className="absolute left-0 right-0 mt-1 bg-gray-900 border border-gray-800 rounded-lg shadow-2xl z-50 max-h-60 overflow-y-auto p-2 flex flex-col gap-1">
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           placeholder="Search node..."
                           value={reportSearchTerm}
                           onChange={e => setReportSearchTerm(e.target.value)}
@@ -595,7 +595,7 @@ export default function FanDashboard() {
             <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-gray-800 pb-3">
               <PhoneCall className="w-4 h-4 text-emerald-400" /> Emergency Hotline
             </h3>
-            
+
             <div className="flex flex-col gap-2.5 text-xs text-gray-400">
               <div className="flex items-center justify-between p-2 bg-gray-950/50 border border-gray-900 rounded-lg">
                 <span>stadium control center</span>
@@ -628,7 +628,7 @@ export default function FanDashboard() {
           {/* Canvas Wrapper */}
           <div className="flex-1 relative bg-gray-950 rounded-2xl overflow-hidden border border-gray-800/80 shadow-2xl">
             <DigitalTwinView compact={true} />
-            
+
             {/* Fan Map Legend overlay */}
             <div className="absolute bottom-4 left-4 z-10 bg-gray-950/90 border border-gray-800 rounded-xl p-3 flex flex-col gap-1.5 shadow-xl backdrop-blur text-[10px] text-gray-400">
               <span className="font-bold text-gray-300 uppercase tracking-wider mb-1 border-b border-gray-900 pb-0.5">Map Amenities</span>

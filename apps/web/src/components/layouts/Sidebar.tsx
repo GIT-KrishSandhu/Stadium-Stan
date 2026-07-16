@@ -14,7 +14,6 @@ export function cn(...inputs: ClassValue[]) {
 const navigation = [
   { name: 'Dashboard', href: '/manager', icon: LayoutDashboard, active: true },
   { name: 'Digital Twin', href: '/manager/twin', icon: Network, active: true },
-  { name: 'Simulation', href: '/manager/simulation', icon: BrainCircuit, active: true },
   { name: 'AI Actions', href: '/manager/actions', icon: Activity, active: true },
   { name: 'Incidents', href: '/manager/incidents', icon: ShieldAlert, active: true },
   { name: 'Audit History', href: '/manager/history', icon: History, active: true },

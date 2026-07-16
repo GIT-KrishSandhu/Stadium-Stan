@@ -22,6 +22,16 @@ export default function VolunteerDashboard() {
     refetchInterval: 3000
   });
 
+  // Fetch twin nodes to resolve UUIDs to names
+  const { data: twinData } = useQuery({
+    queryKey: ['twin-nodes', 'metlife'],
+    queryFn: async () => {
+      const res = await api.get('/venues/metlife/twin');
+      return res.data;
+    }
+  });
+  const nodes = twinData?.nodes || [];
+
   const activeAssignment = assignments?.find((a: any) => 
     ['pending', 'accepted', 'en_route', 'at_location'].includes(a.status)
   );
@@ -136,7 +146,9 @@ export default function VolunteerDashboard() {
                 <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Location</span>
                 <div className="flex items-center gap-2 text-white">
                   <MapPin className="w-4 h-4 text-emerald-500" />
-                  <span className="font-medium">{activeAssignment.location_node_id || "Unassigned"}</span>
+                  <span className="font-medium">
+                    {nodes.find((n: any) => n.id === activeAssignment.location_node_id)?.name || activeAssignment.location_node_id || "Unassigned"}
+                  </span>
                 </div>
               </div>
               <div className="flex flex-col gap-1">
@@ -255,8 +267,8 @@ function IncidentModal({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl">
-        <div className="p-4 border-b border-gray-800 flex items-center justify-between bg-red-900/20">
+      <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-md shadow-2xl">
+        <div className="p-4 border-b border-gray-800 flex items-center justify-between bg-red-900/20 rounded-t-2xl">
           <div className="flex items-center gap-2 text-red-500">
             <ShieldAlert className="w-5 h-5" />
             <h3 className="font-bold">Report Incident</h3>

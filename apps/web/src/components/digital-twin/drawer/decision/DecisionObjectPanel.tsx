@@ -144,7 +144,7 @@ export function DecisionObjectPanel({ nodeId, onClose }: { nodeId: string, onClo
               <ShieldCheck className="w-4 h-4 text-blue-400" />
               Operational Decision
             </h2>
-            <span className="text-[10px] text-gray-500 uppercase tracking-widest">{activeDecision.id}</span>
+            <span className="text-[10px] text-gray-500 uppercase tracking-widest">#{activeDecision.id.split('-')[0]}</span>
           </div>
         </div>
         <div className="px-2 py-1 rounded text-xs font-bold uppercase tracking-wider bg-blue-900/20 text-blue-400 border border-blue-900/30">

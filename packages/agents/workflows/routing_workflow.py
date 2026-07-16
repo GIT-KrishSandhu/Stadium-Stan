@@ -33,8 +33,8 @@ def run_routing_workflow(event_data: Dict[str, Any]) -> AgentResponse:
         ),
         communication=CommunicationPlan(
             manager_message=f"Routing info: {path}. ETA {route.get('estimated_time_mins')} mins.",
-            volunteer_message=f"Direct people from {start} to {end} via {path}.",
-            fan_message=f"Your route to {end} takes {route.get('estimated_time_mins')} mins."
+            volunteer_message=f"Direct people from {route.get('start')} to {route.get('end')} via {path}.",
+            fan_message=f"Your route from {route.get('start')} to {route.get('end')} takes approximately {route.get('estimated_time_mins')} minutes."
         ),
         route={
             "path_ids": route.get("path_ids", []),

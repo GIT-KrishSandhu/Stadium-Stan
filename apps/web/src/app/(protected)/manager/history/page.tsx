@@ -19,6 +19,16 @@ export default function HistoryPage() {
     refetchInterval: 5000
   });
 
+  const { data: twinData } = useQuery({
+    queryKey: ['twin-nodes', 'metlife'],
+    queryFn: async () => {
+      const res = await api.get('/venues/metlife/twin');
+      return res.data;
+    }
+  });
+  const nodes = twinData?.nodes || [];
+  const selectedNodeName = nodes.find((n: any) => n.id === selectedNodeId)?.name || selectedNodeId;
+
   const filteredActions = selectedNodeId 
     ? actions?.filter((a: any) => a.node_id === selectedNodeId)
     : actions;
@@ -41,7 +51,7 @@ export default function HistoryPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 overflow-hidden">
         <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 overflow-y-auto relative">
           <h2 className="text-lg font-bold text-white mb-4 sticky top-0 bg-gray-950 pb-2 z-10 border-b border-gray-900">
-            {selectedNodeId ? `Node Timeline: ${selectedNodeId}` : 'Global Timeline'}
+            {selectedNodeId ? `Node Timeline: ${selectedNodeName}` : 'Global Timeline'}
           </h2>
           {isLoading ? (
             <div className="flex justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-blue-500" /></div>
@@ -52,7 +62,7 @@ export default function HistoryPage() {
 
         <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 overflow-y-auto relative">
           <h2 className="text-lg font-bold text-white mb-4 sticky top-0 bg-gray-950 pb-2 z-10 border-b border-gray-900">
-            {selectedNodeId ? `Recommendations: ${selectedNodeId}` : 'Recent Recommendations'}
+            {selectedNodeId ? `Recommendations: ${selectedNodeName}` : 'Recent Recommendations'}
           </h2>
           {isLoading ? (
             <div className="flex justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-blue-500" /></div>

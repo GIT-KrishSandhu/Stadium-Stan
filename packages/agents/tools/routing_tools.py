@@ -64,9 +64,11 @@ def calculate_route(start: str, end: str, route_type: str = "shortest") -> Dict[
         else:
             estimated_time = 0
             
+        start_name = node_id_name_map.get(start_id, start)
+        end_name = node_id_name_map.get(end_id, end)
         return {
-            "start": start,
-            "end": end,
+            "start": start_name,
+            "end": end_name,
             "route_type": route_type,
             "path": path_names,
             "path_ids": path_ids,
@@ -74,13 +76,22 @@ def calculate_route(start: str, end: str, route_type: str = "shortest") -> Dict[
         }
     except Exception as e:
         print(f"Error in routing: {e}")
-        # Return fallback mock route in case graph build fails
-        fallback_path = [start, "Corridor 1", end]
-        if start == "Entrance" and end == "Gate A":
+        # Try to resolve start and end IDs in fallback if possible
+        start_name = start
+        end_name = end
+        try:
+            nodes = db.query(StadiumNode).all()
+            node_id_name_map = {n.id: n.name for n in nodes}
+            start_name = node_id_name_map.get(start, start)
+            end_name = node_id_name_map.get(end, end)
+        except Exception:
+            pass
+        fallback_path = [start_name, "Corridor 1", end_name]
+        if start_name == "Entrance" and end_name == "Gate A":
             fallback_path = ["Entrance", "Corridor A", "Gate A"]
         return {
-            "start": start,
-            "end": end,
+            "start": start_name,
+            "end": end_name,
             "route_type": route_type,
             "path": fallback_path,
             "path_ids": [start, end],

@@ -19,7 +19,9 @@ export default function VolunteerLayout({ children }: { children: React.ReactNod
     logout();
     localStorage.removeItem('stadium_stan_volunteer');
     localStorage.removeItem('volunteer_id');
-    router.push('/volunteer-login');
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+    }
   };
 
   useEffect(() => {

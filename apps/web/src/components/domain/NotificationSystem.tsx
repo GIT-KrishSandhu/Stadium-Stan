@@ -77,7 +77,8 @@ export function NotificationSystem() {
   const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
   const currentRoleFromPath = pathname.includes('/manager') ? 'manager' : pathname.includes('/volunteer') ? 'volunteer' : pathname.includes('/fan') ? 'fan' : null;
 
-  const currentRole = currentRoleFromPath || useAuthStore(state => state.user?.role) || 'fan';
+  const userRole = useAuthStore(state => state.user?.role);
+  const currentRole = currentRoleFromPath || userRole || 'fan';
   const allNotifications = useNotificationStore(state => state.notifications);
   const notifications = React.useMemo(() => 
     allNotifications.filter(n => n.role === currentRole && !n.read),

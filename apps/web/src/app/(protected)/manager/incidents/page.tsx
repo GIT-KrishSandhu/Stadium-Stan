@@ -21,6 +21,15 @@ export default function IncidentsPage() {
     refetchInterval: 5000
   });
 
+  const { data: twinData } = useQuery({
+    queryKey: ['twin-nodes', 'metlife'],
+    queryFn: async () => {
+      const res = await api.get('/venues/metlife/twin');
+      return res.data;
+    }
+  });
+  const nodes = twinData?.nodes || [];
+
   const handleIncidentClick = (nodeId: string | null) => {
     if (nodeId) {
       setSelectedNode(nodeId);
@@ -94,7 +103,7 @@ export default function IncidentsPage() {
                     {incident.node_id && (
                       <div className="flex items-center gap-2 text-gray-400 text-sm">
                         <MapPin className="w-4 h-4" />
-                        <span>Node: {incident.node_id}</span>
+                        <span>Location: {nodes.find((n: any) => n.id === incident.node_id)?.name || incident.node_id}</span>
                       </div>
                     )}
                     <div className="flex items-center gap-2 text-gray-400 text-sm">
