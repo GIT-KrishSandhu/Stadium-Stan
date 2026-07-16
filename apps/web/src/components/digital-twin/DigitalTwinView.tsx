@@ -54,9 +54,20 @@ export function DigitalTwinView({ compact = false }: { compact?: boolean }) {
   }, [data, setGraph, venueId]);
 
   return (
-    <div className="flex h-full w-full relative overflow-hidden rounded-xl border border-gray-800">
+    <div 
+      className="flex h-full w-full relative overflow-hidden rounded-xl border"
+      style={{
+        borderColor: 'var(--border)',
+      }}
+    >
       {isLoading ? (
-        <div className="flex-1 flex items-center justify-center bg-gray-950 text-gray-400">
+        <div 
+          className="flex-1 flex items-center justify-center"
+          style={{
+            backgroundColor: 'var(--background)',
+            color: 'var(--text-secondary)',
+          }}
+        >
           <div className="flex flex-col items-center gap-4">
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-800 border-t-blue-600"></div>
             Loading Digital Twin...
