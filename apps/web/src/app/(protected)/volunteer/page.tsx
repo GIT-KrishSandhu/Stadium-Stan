@@ -108,7 +108,18 @@ export default function VolunteerDashboard() {
           <select 
             value={status} 
             onChange={(e) => updateStatusMutation.mutate(e.target.value)}
-            className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block p-2"
+            className="text-sm rounded-lg block p-2 border"
+            style={{
+              backgroundColor: 'var(--surface-secondary)',
+              borderColor: 'var(--border)',
+              color: 'var(--foreground)',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = 'var(--green-success)';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = 'var(--border)';
+            }}
           >
             <option value="available">Available</option>
             <option value="busy">Busy</option>
@@ -119,21 +130,28 @@ export default function VolunteerDashboard() {
 
       {/* Active Assignment Card */}
       {isLoading ? (
-        <div className="flex justify-center p-10 bg-gray-900 border border-gray-800 rounded-xl">
-          <Loader2 className="w-8 h-8 text-emerald-500 animate-spin" />
+        <div className="flex justify-center p-10 border rounded-xl" style={{ backgroundColor: 'var(--surface-secondary)', borderColor: 'var(--border)' }}>
+          <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--green-success)' }} />
         </div>
       ) : activeAssignment ? (
-        <div className="bg-gray-900 border-2 border-emerald-900/50 rounded-xl overflow-hidden shadow-2xl relative">
-          <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
+        <div className="border-2 rounded-xl overflow-hidden shadow-2xl relative" style={{ backgroundColor: 'var(--surface-secondary)', borderColor: 'var(--green-success)' }}>
+          <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: 'var(--green-success)' }}></div>
           
-          <div className="p-5 border-b border-gray-800 bg-gray-800/30">
+          <div className="p-5 border-b bg-opacity-30" style={{ borderBottomColor: 'var(--border)', backgroundColor: 'rgba(var(--surface-tertiary-rgb), 0.3)' }}>
             <div className="flex justify-between items-start mb-2">
-              <span className="bg-emerald-900/40 text-emerald-400 text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Active Assignment</span>
-              <span className="text-xs text-gray-500 font-mono">#{activeAssignment.id.split('-')[0]}</span>
+              <span 
+                className="text-xs font-bold px-2 py-1 rounded uppercase tracking-wider border"
+                style={{
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  borderColor: 'rgba(16, 185, 129, 0.2)',
+                  color: 'var(--green-success)',
+                }}
+              >Active Assignment</span>
+              <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>#{activeAssignment.id.split('-')[0]}</span>
             </div>
-            <h2 className="text-xl font-bold text-white capitalize">{activeAssignment.action_details.replace(/_/g, ' ')}</h2>
+            <h2 className="text-xl font-bold capitalize" style={{ color: 'var(--foreground)' }}>{activeAssignment.action_details.replace(/_/g, ' ')}</h2>
             {activeAssignment.incident_details && (
-              <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
+              <p className="text-sm mt-1 flex items-center gap-1" style={{ color: 'var(--red-incident)' }}>
                 <AlertCircle className="w-4 h-4" /> 
                 Related to: {activeAssignment.incident_details}
               </p>
@@ -143,18 +161,18 @@ export default function VolunteerDashboard() {
           <div className="p-5 flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-1">
-                <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Location</span>
-                <div className="flex items-center gap-2 text-white">
-                  <MapPin className="w-4 h-4 text-emerald-500" />
+                <span className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>Location</span>
+                <div className="flex items-center gap-2" style={{ color: 'var(--foreground)' }}>
+                  <MapPin className="w-4 h-4" style={{ color: 'var(--green-success)' }} />
                   <span className="font-medium">
                     {nodes.find((n: any) => n.id === activeAssignment.location_node_id)?.name || activeAssignment.location_node_id || "Unassigned"}
                   </span>
                 </div>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Priority</span>
-                <div className="flex items-center gap-2 text-white">
-                  <AlertCircle className="w-4 h-4 text-orange-500" />
+                <span className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>Priority</span>
+                <div className="flex items-center gap-2" style={{ color: 'var(--foreground)' }}>
+                  <AlertCircle className="w-4 h-4" style={{ color: 'var(--amber-warning)' }} />
                   <span className="font-medium capitalize">{activeAssignment.priority}</span>
                 </div>
               </div>
@@ -189,11 +207,22 @@ export default function VolunteerDashboard() {
       )}
 
       {/* Quick Actions */}
-      <h3 className="text-gray-400 font-bold uppercase tracking-wider text-xs px-2 mt-4">Quick Actions</h3>
+      <h3 className="font-bold uppercase tracking-wider text-xs px-2 mt-4" style={{ color: 'var(--text-secondary)' }}>Quick Actions</h3>
       <div className="grid grid-cols-2 gap-4">
         <button 
           onClick={() => setShowIncidentModal(true)}
-          className="bg-red-900/20 border border-red-900/50 hover:bg-red-900/40 rounded-xl p-4 flex flex-col items-center justify-center gap-3 transition-colors text-red-400"
+          className="border rounded-xl p-4 flex flex-col items-center justify-center gap-3 transition-all"
+          style={{
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderColor: 'rgba(239, 68, 68, 0.2)',
+            color: 'var(--red-incident)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+          }}
         >
           <ShieldAlert className="w-8 h-8" />
           <span className="font-bold text-sm">Report Incident</span>

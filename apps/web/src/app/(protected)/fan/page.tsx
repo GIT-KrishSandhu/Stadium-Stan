@@ -200,39 +200,69 @@ export default function FanDashboard() {
   const selectedReportNodeObj = nodes.find((n: any) => n.id === reportNode);
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-gray-950 text-white">
+    <div className="flex flex-col min-h-screen w-full text-white" style={{ backgroundColor: 'var(--background)' }}>
 
       {/* Top Banner Header */}
-      <header className="flex h-16 w-full items-center justify-between border-b border-gray-800 bg-gray-900/60 px-6 shrink-0 backdrop-blur-md z-10">
+      <header 
+        className="flex h-16 w-full items-center justify-between border-b px-6 shrink-0 backdrop-blur-md z-10"
+        style={{
+          backgroundColor: 'rgba(var(--surface-secondary-rgb), 0.6)',
+          borderBottomColor: 'var(--border)',
+        }}
+      >
         <Link href="/" className="flex items-center gap-3 hover:opacity-85 transition-opacity">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
+          <div 
+            className="h-10 w-10 rounded-xl flex items-center justify-center font-bold text-white shadow-lg"
+            style={{
+              backgroundColor: 'var(--blue-primary)',
+              boxShadow: '0 0 20px rgba(0, 102, 255, 0.2)',
+            }}
+          >
             S
           </div>
           <div>
-            <h1 className="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 leading-tight">Stadium Stan</h1>
-            <p className="text-[10px] text-blue-400 uppercase tracking-widest font-bold font-mono">Interactive Fan Portal</p>
+            <h1 className="text-lg font-extrabold leading-tight" style={{ color: 'var(--foreground)' }}>Stadium Stan</h1>
+            <p className="text-[10px] uppercase tracking-widest font-bold font-mono" style={{ color: 'var(--blue-primary)' }}>Interactive Fan Portal</p>
           </div>
         </Link>
 
         <div className="flex items-center gap-4 sm:gap-6">
           <div className="hidden sm:flex flex-col text-right">
-            <span className="text-[10px] text-gray-500 font-bold uppercase">LIVE EVENT</span>
-            <span className="text-xs font-semibold text-gray-300">FIFA World Cup 2026</span>
+            <span className="text-[10px] font-bold uppercase" style={{ color: 'var(--text-muted)' }}>LIVE EVENT</span>
+            <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>FIFA World Cup 2026</span>
           </div>
-          <div className="h-8 w-px bg-gray-800 hidden sm:block" />
+          <div className="h-8 w-px hidden sm:block" style={{ backgroundColor: 'var(--border)' }} />
           <div className="flex items-center gap-2">
-            <span className={cn(
-              "w-2 h-2 rounded-full",
-              isConnected ? "bg-emerald-500 animate-pulse" : "bg-red-500"
-            )} />
-            <span className="text-xs text-gray-400 font-medium hidden md:inline">
+            <span 
+              className="w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: isConnected ? 'var(--green-success)' : 'var(--red-incident)',
+                animation: isConnected ? 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none',
+              }}
+            />
+            <span className="text-xs font-medium hidden md:inline" style={{ color: 'var(--text-secondary)' }}>
               {isConnected ? 'Telemetry Active' : 'Disconnected'}
             </span>
           </div>
           <NotificationCenter />
           <Link
             href="/"
-            className="p-1.5 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors border border-transparent"
+            className="p-1.5 rounded-lg transition-colors border"
+            style={{
+              color: 'var(--text-secondary)',
+              borderColor: 'transparent',
+              backgroundColor: 'transparent',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-tertiary)';
+              e.currentTarget.style.borderColor = 'var(--border)';
+              e.currentTarget.style.color = 'var(--foreground)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.borderColor = 'transparent';
+              e.currentTarget.style.color = 'var(--text-secondary)';
+            }}
             title="Return to Landing Page"
           >
             <LogOut className="w-4 h-4" />
@@ -248,44 +278,87 @@ export default function FanDashboard() {
 
           {/* Live Alerts Marquee */}
           {activeAlerts.length > 0 && (
-            <div className="bg-red-950/60 border border-red-900/50 text-red-200 px-4 py-3 text-xs font-bold flex items-center gap-3 rounded-2xl animate-pulse shrink-0">
-              <AlertTriangle className="w-5 h-5 text-red-500 shrink-0" />
+            <div 
+              className="px-4 py-3 text-xs font-bold flex items-center gap-3 rounded-2xl shrink-0 border"
+              style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                borderColor: 'rgba(239, 68, 68, 0.2)',
+                color: 'var(--red-incident)',
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              }}
+            >
+              <AlertTriangle className="w-5 h-5 shrink-0" style={{ color: 'var(--red-incident)' }} />
               <div>
-                <span className="uppercase text-red-400 block text-[10px] tracking-wider font-extrabold">LIVE CRITICAL VENUE ALERT</span>
+                <span className="uppercase block text-[10px] tracking-wider font-extrabold" style={{ color: 'var(--red-incident)' }}>LIVE CRITICAL VENUE ALERT</span>
                 <span className="mt-0.5 block">{activeAlerts.map((a: any) => `${a.incident_type.replace(/_/g, ' ').toUpperCase()} reported at ${nodes.find((n: any) => n.id === a.node_id)?.name || a.node_id}`).join(' | ')}</span>
               </div>
             </div>
           )}
 
           {/* Event & Venue Info Card */}
-          <div className="bg-gray-900/40 border border-gray-800/80 rounded-2xl p-5 flex flex-col gap-4 shadow-lg backdrop-blur-xl shrink-0">
+          <div 
+            className="border rounded-2xl p-5 flex flex-col gap-4 shadow-lg backdrop-blur-xl shrink-0"
+            style={{
+              backgroundColor: 'rgba(var(--surface-secondary-rgb), 0.4)',
+              borderColor: 'var(--border)',
+            }}
+          >
             <div className="flex gap-4">
-              <div className="h-12 w-12 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+              <div 
+                className="h-12 w-12 rounded-xl border flex items-center justify-center shrink-0"
+                style={{
+                  backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                  borderColor: 'rgba(0, 102, 255, 0.2)',
+                  color: 'var(--blue-primary)',
+                }}
+              >
                 <Calendar className="w-6 h-6" />
               </div>
               <div className="flex-1">
-                <h3 className="text-xs text-gray-400 font-bold uppercase tracking-wider">Upcoming Match</h3>
-                <h4 className="text-base font-extrabold text-white mt-0.5">USA vs Argentina</h4>
-                <p className="text-xs text-gray-400 mt-1">July 15, 2026 • Kickoff 19:00 EST</p>
+                <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>Upcoming Match</h3>
+                <h4 className="text-base font-extrabold mt-0.5" style={{ color: 'var(--foreground)' }}>USA vs Argentina</h4>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>July 15, 2026 • Kickoff 19:00 EST</p>
               </div>
             </div>
 
-            <div className="border-t border-gray-800/60 pt-4 flex gap-4">
-              <div className="h-12 w-12 rounded-xl bg-purple-600/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+            <div 
+              className="border-t pt-4 flex gap-4"
+              style={{ borderTopColor: 'var(--border)' }}
+            >
+              <div 
+                className="h-12 w-12 rounded-xl border flex items-center justify-center shrink-0"
+                style={{
+                  backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                  borderColor: 'rgba(168, 85, 247, 0.2)',
+                  color: 'var(--purple-ai)',
+                }}
+              >
                 <Building2 className="w-6 h-6" />
               </div>
               <div className="flex-1">
-                <h3 className="text-xs text-gray-400 font-bold uppercase tracking-wider">Venue Details</h3>
-                <h4 className="text-base font-extrabold text-white mt-0.5">MetLife Stadium</h4>
-                <p className="text-xs text-gray-400 mt-1">Capacity: 82,500 • East Rutherford, NJ</p>
+                <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>Venue Details</h3>
+                <h4 className="text-base font-extrabold mt-0.5" style={{ color: 'var(--foreground)' }}>MetLife Stadium</h4>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>Capacity: 82,500 • East Rutherford, NJ</p>
               </div>
             </div>
           </div>
 
           {/* Entry Gates wait times list */}
-          <div className="bg-gray-900/40 border border-gray-800/80 rounded-2xl p-5 flex flex-col gap-4 shadow-lg backdrop-blur-xl">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-gray-800 pb-3">
-              <Users className="w-4 h-4 text-indigo-400" /> Entrance Gate Telemetry
+          <div 
+            className="border rounded-2xl p-5 flex flex-col gap-4 shadow-lg backdrop-blur-xl"
+            style={{
+              backgroundColor: 'rgba(var(--surface-secondary-rgb), 0.4)',
+              borderColor: 'var(--border)',
+            }}
+          >
+            <h3 
+              className="text-sm font-bold uppercase tracking-wider flex items-center gap-2 border-b pb-3"
+              style={{
+                borderBottomColor: 'var(--border)',
+                color: 'var(--foreground)',
+              }}
+            >
+              <Users className="w-4 h-4" style={{ color: 'var(--purple-ai)' }} /> Entrance Gate Telemetry
             </h3>
 
             <div className="flex flex-col gap-3">
@@ -295,38 +368,58 @@ export default function FanDashboard() {
                 return (
                   <div
                     key={g.id}
-                    className={cn(
-                      "flex justify-between items-center rounded-xl p-3 border transition-all",
-                      isSuggested ? "bg-blue-950/20 border-blue-500/50 shadow-md shadow-blue-900/5" : "bg-gray-950/40 border-gray-800/60"
-                    )}
+                    className="flex justify-between items-center rounded-xl p-3 border transition-all"
+                    style={{
+                      backgroundColor: isSuggested ? 'rgba(0, 102, 255, 0.1)' : 'rgba(var(--surface-primary-rgb), 0.4)',
+                      borderColor: isSuggested ? 'rgba(0, 102, 255, 0.2)' : 'var(--border)',
+                      boxShadow: isSuggested ? '0 2px 8px rgba(0, 102, 255, 0.1)' : 'none',
+                    }}
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className={cn(
-                        "w-2.5 h-2.5 rounded-full shrink-0",
-                        g.status === 'closed' ? 'bg-red-500' : 'bg-emerald-500'
-                      )} />
+                      <span 
+                        className="w-2.5 h-2.5 rounded-full shrink-0"
+                        style={{
+                          backgroundColor: g.status === 'closed' ? 'var(--red-incident)' : 'var(--green-success)',
+                        }}
+                      />
                       <div>
-                        <span className="font-extrabold text-white text-sm flex items-center gap-1.5">
+                        <span className="font-extrabold text-sm flex items-center gap-1.5" style={{ color: 'var(--foreground)' }}>
                           {g.name}
                           {isSuggested && (
-                            <span className="inline-flex items-center gap-0.5 text-[9px] bg-blue-500/20 border border-blue-500/30 text-blue-400 px-1.5 py-0.5 rounded font-extrabold tracking-widest uppercase">
+                            <span 
+                              className="inline-flex items-center gap-0.5 text-[9px] border px-1.5 py-0.5 rounded font-extrabold tracking-widest uppercase"
+                              style={{
+                                backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                                borderColor: 'rgba(0, 102, 255, 0.2)',
+                                color: 'var(--blue-primary)',
+                              }}
+                            >
                               <Sparkles className="w-2 h-2 fill-current" /> Suggested
                             </span>
                           )}
                         </span>
-                        <span className="text-[10px] text-gray-500 block uppercase font-mono mt-0.5">Node ID: {g.id}</span>
+                        <span className="text-[10px] block uppercase font-mono mt-0.5" style={{ color: 'var(--text-muted)' }}>Node ID: {g.id}</span>
                       </div>
                     </div>
                     <div className="text-right">
                       {g.status === 'closed' ? (
-                        <span className="text-xs text-red-400 font-bold uppercase tracking-wider bg-red-950/40 border border-red-900/30 px-2.5 py-1 rounded">CLOSED</span>
+                        <span 
+                          className="text-xs font-bold uppercase tracking-wider border px-2.5 py-1 rounded"
+                          style={{
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderColor: 'rgba(239, 68, 68, 0.2)',
+                            color: 'var(--red-incident)',
+                          }}
+                        >CLOSED</span>
                       ) : (
-                        <span className={cn(
-                          "text-xs font-mono font-bold px-2.5 py-1 rounded border",
-                          wait > 15
-                            ? "bg-orange-950/40 text-orange-400 border-orange-900/30"
-                            : "bg-emerald-950/40 text-emerald-400 border-emerald-900/30"
-                        )}>
+                        <span 
+                          className="text-xs font-mono font-bold px-2.5 py-1 rounded border"
+                          style={{
+                            backgroundColor: wait > 15 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(16, 185, 129, 0.1)',
+                            borderColor: wait > 15 ? 'rgba(245, 158, 11, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+                            color: wait > 15 ? 'var(--amber-warning)' : 'var(--green-success)',
+                          }}
+                        >
                           {wait} min wait
                         </span>
                       )}
