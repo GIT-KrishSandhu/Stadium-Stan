@@ -45,27 +45,57 @@ export default function HistoryPage() {
   return (
     <div className="flex flex-col h-full min-h-0">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-white">Audit History</h1>
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--foreground)' }}>Audit History</h1>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 overflow-hidden">
-        <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 overflow-y-auto relative">
-          <h2 className="text-lg font-bold text-white mb-4 sticky top-0 bg-gray-950 pb-2 z-10 border-b border-gray-900">
+        <div 
+          className="border rounded-lg p-6 overflow-y-auto relative"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <h2 
+            className="text-lg font-bold mb-4 sticky top-0 pb-2 z-10 border-b"
+            style={{
+              color: 'var(--foreground)',
+              backgroundColor: 'var(--surface-secondary)',
+              borderBottomColor: 'var(--border-subtle)',
+            }}
+          >
             {selectedNodeId ? `Node Timeline: ${selectedNodeName}` : 'Global Timeline'}
           </h2>
           {isLoading ? (
-            <div className="flex justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-blue-500" /></div>
+            <div className="flex justify-center p-8">
+              <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--blue-primary)' }} />
+            </div>
           ) : (
             <DecisionTimeline timeline={timeline} />
           )}
         </div>
 
-        <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 overflow-y-auto relative">
-          <h2 className="text-lg font-bold text-white mb-4 sticky top-0 bg-gray-950 pb-2 z-10 border-b border-gray-900">
+        <div 
+          className="border rounded-lg p-6 overflow-y-auto relative"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <h2 
+            className="text-lg font-bold mb-4 sticky top-0 pb-2 z-10 border-b"
+            style={{
+              color: 'var(--foreground)',
+              backgroundColor: 'var(--surface-secondary)',
+              borderBottomColor: 'var(--border-subtle)',
+            }}
+          >
             {selectedNodeId ? `Recommendations: ${selectedNodeName}` : 'Recent Recommendations'}
           </h2>
           {isLoading ? (
-            <div className="flex justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-blue-500" /></div>
+            <div className="flex justify-center p-8">
+              <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--blue-primary)' }} />
+            </div>
           ) : (
             <RecommendationHistory history={filteredActions || []} />
           )}

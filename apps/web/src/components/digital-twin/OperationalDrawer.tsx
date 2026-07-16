@@ -40,16 +40,37 @@ export function OperationalDrawer() {
 
   return (
     <>
-    <div className="flex flex-col h-full bg-gray-950 border-l border-gray-800 w-[500px] shadow-2xl animate-in slide-in-from-right-8 fade-in duration-300 relative z-10">
+    <div 
+      className="flex flex-col h-full w-[500px] shadow-2xl animate-in slide-in-from-right-8 fade-in duration-300 relative z-10 border-l"
+      style={{
+        backgroundColor: 'var(--surface-secondary)',
+        borderLeftColor: 'var(--border)',
+      }}
+    >
       {/* Header */}
-      <div className="p-4 border-b border-gray-800 flex items-center justify-between bg-gray-950">
+      <div 
+        className="p-4 border-b flex items-center justify-between"
+        style={{
+          borderBottomColor: 'var(--border)',
+          backgroundColor: 'var(--surface-primary)',
+        }}
+      >
         <div>
-          <h2 className="text-lg font-bold text-white uppercase tracking-wider">{nodeData.name}</h2>
-          <span className="text-xs text-gray-500 uppercase">{nodeData.type} Node</span>
+          <h2 className="text-lg font-bold uppercase tracking-wider" style={{ color: 'var(--foreground)' }}>{nodeData.name}</h2>
+          <span className="text-xs uppercase" style={{ color: 'var(--text-muted)' }}>{nodeData.type} Node</span>
         </div>
         <button 
           onClick={() => setSelectedNode(null)}
-          className="p-1.5 text-gray-400 hover:text-white hover:bg-gray-800 rounded-md transition-colors"
+          className="p-1.5 rounded-md transition-colors"
+          style={{ color: 'var(--text-muted)' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'var(--foreground)';
+            e.currentTarget.style.backgroundColor = 'var(--surface-secondary)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--text-muted)';
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
         >
           <X className="w-5 h-5" />
         </button>
@@ -58,24 +79,44 @@ export function OperationalDrawer() {
       {/* Content */}
       <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-6 relative">
         {isLoading && !context ? (
-          <div className="absolute inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-10">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-600 border-t-blue-500"></div>
+          <div 
+            className="absolute inset-0 backdrop-blur-sm flex items-center justify-center z-10"
+            style={{ backgroundColor: 'var(--surface-secondary)' }}
+          >
+            <div 
+              className="h-6 w-6 animate-spin rounded-full border-2"
+              style={{
+                borderColor: 'var(--border)',
+                borderTopColor: 'var(--blue-primary)',
+              }}
+            />
           </div>
         ) : null}
         
         {/* Live Metrics (From WebSocket / GraphStore directly to avoid latency) */}
         <div className="grid grid-cols-2 gap-3">
-          <div className="col-span-2 p-3 bg-gray-950 rounded-lg border border-gray-800 flex items-center justify-between">
+          <div 
+            className="col-span-2 p-3 rounded-lg border flex items-center justify-between"
+            style={{
+              backgroundColor: 'var(--surface-primary)',
+              borderColor: 'var(--border)',
+            }}
+          >
             <div className="flex flex-col">
-              <span className="text-xs text-gray-500">Live Status</span>
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Live Status</span>
               <div className="flex items-center gap-2 mt-1">
-                <span className={cn("w-2 h-2 rounded-full", nodeData.status === 'closed' ? 'bg-red-500' : 'bg-emerald-500')} />
-                <span className="text-sm font-medium uppercase text-gray-300">{nodeData.status}</span>
+                <span 
+                  className="w-2 h-2 rounded-full"
+                  style={{
+                    backgroundColor: nodeData.status === 'closed' ? 'var(--red-incident)' : 'var(--green-success)',
+                  }}
+                />
+                <span className="text-sm font-medium uppercase" style={{ color: 'var(--text-secondary)' }}>{nodeData.status}</span>
               </div>
             </div>
             <div className="flex flex-col text-right">
-              <span className="text-xs text-gray-500">Live Occupancy</span>
-              <span className="text-lg font-mono font-bold text-gray-200">{nodeData.occupancy.toLocaleString()}</span>
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Live Occupancy</span>
+              <span className="text-lg font-mono font-bold" style={{ color: 'var(--foreground)' }}>{nodeData.occupancy.toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -107,10 +148,23 @@ export function OperationalDrawer() {
 
         {/* AI Action Decision Trigger */}
         {context && (
-          <div className="mt-auto pt-4 border-t border-gray-800">
+          <div 
+            className="mt-auto pt-4 border-t"
+            style={{ borderTopColor: 'var(--border)' }}
+          >
             <button 
               onClick={() => setShowDecisionPanel(true)}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded font-bold transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded font-bold transition-colors"
+              style={{
+                backgroundColor: 'var(--blue-primary)',
+                color: 'white',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--blue-accent)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--blue-primary)';
+              }}
             >
               <Cpu className="w-4 h-4" /> Review Operational Decisions
             </button>

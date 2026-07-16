@@ -43,16 +43,35 @@ export default function ActionsPage() {
   return (
     <div className="flex flex-col h-full min-h-0 relative">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-white">AI Actions & Executions</h1>
-        <div className="flex bg-gray-900 border border-gray-800 rounded-lg p-1">
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--foreground)' }}>AI Actions & Executions</h1>
+        <div 
+          className="flex rounded-lg p-1 border"
+          style={{
+            backgroundColor: 'var(--surface-primary)',
+            borderColor: 'var(--border)',
+          }}
+        >
           {['all', 'pending', 'executing', 'completed', 'failed'].map(f => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={cn(
-                "px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-colors",
-                filter === f ? "bg-gray-800 text-white" : "text-gray-500 hover:text-gray-300 hover:bg-gray-800/50"
-              )}
+              className="px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all duration-200"
+              style={{
+                backgroundColor: filter === f ? 'var(--surface-secondary)' : 'transparent',
+                color: filter === f ? 'var(--foreground)' : 'var(--text-tertiary)',
+              }}
+              onMouseEnter={(e) => {
+                if (filter !== f) {
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (filter !== f) {
+                  e.currentTarget.style.color = 'var(--text-tertiary)';
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }
+              }}
             >
               {f}
             </button>
@@ -62,16 +81,37 @@ export default function ActionsPage() {
       
       <div className="flex-1 flex gap-6 overflow-hidden">
         {/* Global Queue List */}
-        <div className="flex-1 bg-gray-950 border border-gray-800 rounded-xl overflow-y-auto p-4 relative">
-          <h2 className="text-lg font-bold text-white mb-4 sticky top-0 bg-gray-950 z-10 pb-2 border-b border-gray-900">Global Operational Queue</h2>
+        <div 
+          className="flex-1 border rounded-lg overflow-y-auto p-4 relative"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <h2 
+            className="text-lg font-bold mb-4 sticky top-0 z-10 pb-2 border-b"
+            style={{
+              color: 'var(--foreground)',
+              backgroundColor: 'var(--surface-secondary)',
+              borderBottomColor: 'var(--border-subtle)',
+            }}
+          >
+            Global Operational Queue
+          </h2>
           
           {isLoading ? (
             <div className="flex items-center justify-center h-40">
-              <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+              <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--blue-primary)' }} />
             </div>
           ) : filteredActions.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-gray-800 rounded-lg">
-              <span className="text-gray-500">No actions found for this filter.</span>
+            <div 
+              className="flex flex-col items-center justify-center h-40 border-2 border-dashed rounded-lg"
+              style={{
+                borderColor: 'var(--border-subtle)',
+                color: 'var(--text-muted)',
+              }}
+            >
+              <span>No actions found for this filter.</span>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -79,29 +119,65 @@ export default function ActionsPage() {
                 <div 
                   key={action.id}
                   onClick={() => action.node_id && setSelectedNode(action.node_id)}
-                  className={cn(
-                    "bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 transition-all",
-                    action.node_id ? "cursor-pointer hover:border-gray-600 hover:shadow-lg hover:shadow-gray-900/50" : "opacity-80"
-                  )}
+                  className="rounded-lg p-4 flex flex-col gap-3 transition-all duration-200 border"
+                  style={{
+                    backgroundColor: 'var(--surface-primary)',
+                    borderColor: action.node_id ? 'var(--border)' : 'var(--border-subtle)',
+                    cursor: action.node_id ? 'pointer' : 'default',
+                    opacity: action.node_id ? 1 : 0.7,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (action.node_id) {
+                      e.currentTarget.style.borderColor = 'var(--blue-primary)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 102, 255, 0.15)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (action.node_id) {
+                      e.currentTarget.style.borderColor = 'var(--border)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }
+                  }}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-2">
                       {getStatusIcon(action.status, action.execution_status)}
-                      <span className="text-sm font-bold text-white line-clamp-1">{action.action}</span>
+                      <span className="text-sm font-semibold line-clamp-1" style={{ color: 'var(--foreground)' }}>
+                        {action.action}
+                      </span>
                     </div>
-                    <span className="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 uppercase font-bold tracking-wider ml-2 shrink-0">
+                    <span 
+                      className="text-xs px-2 py-0.5 rounded uppercase font-bold tracking-wider ml-2 shrink-0 border"
+                      style={{
+                        backgroundColor: 'var(--surface-secondary)',
+                        color: 'var(--text-secondary)',
+                        borderColor: 'var(--border)',
+                      }}
+                    >
                       {action.execution_status !== 'PENDING' ? action.execution_status.replace(/_/g, ' ') : action.status}
                     </span>
                   </div>
                   
-                  <p className="text-xs text-gray-400 line-clamp-2">
+                  <p className="text-xs line-clamp-2" style={{ color: 'var(--text-tertiary)' }}>
                     {action.operational_summary || 'No summary available.'}
                   </p>
                   
-                  <div className="mt-auto pt-3 border-t border-gray-800 flex items-center justify-between">
-                    <span className="text-[10px] text-gray-500 font-mono">ID: {action.id.split('-')[0]}...</span>
+                  <div 
+                    className="mt-auto pt-3 border-t flex items-center justify-between"
+                    style={{ borderTopColor: 'var(--border-subtle)' }}
+                  >
+                    <span className="text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>
+                      ID: {action.id.split('-')[0]}...
+                    </span>
                     {action.node_id && (
-                      <span className="text-[10px] bg-blue-900/20 text-blue-400 border border-blue-900/30 px-2 py-0.5 rounded uppercase font-bold tracking-wider">
+                      <span 
+                        className="text-[10px] px-2 py-0.5 rounded uppercase font-bold tracking-wider border"
+                        style={{
+                          backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                          color: 'var(--blue-primary)',
+                          borderColor: 'rgba(0, 102, 255, 0.2)',
+                        }}
+                      >
                         Node: {action.node_id.substring(0, 8)}
                       </span>
                     )}
@@ -114,7 +190,13 @@ export default function ActionsPage() {
 
         {/* Right Side Drawer */}
         {selectedNodeId && (
-          <div className="w-[500px] shrink-0 bg-gray-950 border border-gray-800 rounded-xl overflow-hidden relative">
+          <div 
+            className="w-[500px] shrink-0 rounded-lg overflow-hidden relative border"
+            style={{
+              backgroundColor: 'var(--surface-secondary)',
+              borderColor: 'var(--border)',
+            }}
+          >
              <DecisionObjectPanel 
                nodeId={selectedNodeId}
                onClose={() => setSelectedNode(null)}

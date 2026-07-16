@@ -6,16 +6,27 @@ import { TopNav } from './TopNav';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen w-full bg-gray-950 text-white">
+    <div className="flex min-h-screen w-full" style={{ backgroundColor: 'var(--navy-950)', color: 'var(--foreground)' }}>
       <Sidebar />
       <div className="flex flex-1 flex-col">
         <TopNav />
-        <main className="flex-1 p-6 bg-gray-900">
+        <main className="flex-1 p-6" style={{ backgroundColor: 'var(--navy-950)' }}>
           {children}
         </main>
-        {/* Footer Status Strip Placeholder */}
-        <div className="h-6 w-full border-t border-gray-800 bg-gray-950 px-4 flex items-center text-xs text-gray-500 shrink-0">
-          System operational.
+        {/* Footer Status Strip - Operational Indicator */}
+        <div 
+          className="h-7 w-full px-6 flex items-center justify-between text-xs shrink-0"
+          style={{
+            backgroundColor: 'var(--surface-primary)',
+            borderTop: '1px solid var(--border-subtle)',
+            color: 'var(--text-secondary)'
+          }}
+        >
+          <span>System operational</span>
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full" style={{ backgroundColor: 'var(--green-success)' }} />
+            <span style={{ color: 'var(--green-success)' }}>All systems nominal</span>
+          </div>
         </div>
       </div>
     </div>

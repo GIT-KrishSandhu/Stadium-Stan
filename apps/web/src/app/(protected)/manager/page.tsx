@@ -7,7 +7,7 @@ export default function OperationsDashboard() {
   return (
     <div className="flex flex-col gap-6 h-full min-h-0">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">Operations Command Center</h1>
+        <h1 className="text-3xl font-bold" style={{ color: 'var(--foreground)' }}>Operations Command Center</h1>
       </div>
 
       {/* Dashboard Grid */}
@@ -16,17 +16,35 @@ export default function OperationsDashboard() {
         {/* Health Panel & Notifications spanning 2 cols on desktop */}
         <div className="xl:col-span-2 flex flex-col gap-6">
           <HealthPanel />
-          <div className="flex-1 min-h-[400px] relative rounded-xl border border-gray-800 overflow-hidden bg-gray-950">
-             <div className="p-4 border-b border-gray-800 bg-gray-900">
-               <h3 className="font-semibold text-white">Live Overview</h3>
-             </div>
-             <DigitalTwinView compact={true} />
+          <div 
+            className="flex-1 min-h-[400px] relative rounded-lg border overflow-hidden flex flex-col"
+            style={{
+              backgroundColor: 'var(--surface-secondary)',
+              borderColor: 'var(--border)',
+            }}
+          >
+            <div 
+              className="p-4 border-b"
+              style={{
+                backgroundColor: 'var(--surface-primary)',
+                borderBottomColor: 'var(--border-subtle)',
+              }}
+            >
+              <h3 className="font-semibold" style={{ color: 'var(--foreground)' }}>Live Overview</h3>
+            </div>
+            <DigitalTwinView compact={true} />
           </div>
         </div>
 
-        {/* Notifications Sidebar */}
-        <div className="xl:col-span-1 rounded-xl border border-gray-800 bg-gray-900/50 p-6 shadow-sm backdrop-blur-sm flex flex-col gap-4">
-          <h3 className="text-lg font-semibold text-white">Recent Incidents</h3>
+        {/* Incidents Sidebar */}
+        <div 
+          className="xl:col-span-1 rounded-lg p-6 border flex flex-col gap-4"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <h3 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>Recent Incidents</h3>
           <div className="flex-1 overflow-y-auto">
             <NotificationSystem />
           </div>

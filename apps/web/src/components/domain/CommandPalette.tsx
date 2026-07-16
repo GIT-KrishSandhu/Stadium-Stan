@@ -54,21 +54,49 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
         role="dialog"
         aria-modal="true"
         aria-label="Command Palette"
-        className="relative w-full max-w-lg bg-gray-900 border border-gray-800 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg rounded-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200 border"
+        style={{
+          backgroundColor: 'var(--surface-secondary)',
+          borderColor: 'var(--border)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+        }}
       >
-        <div className="flex items-center px-4 py-3 border-b border-gray-800">
-          <Search className="w-5 h-5 text-gray-400 mr-3" />
+        <div 
+          className="flex items-center px-4 py-3 border-b"
+          style={{ borderBottomColor: 'var(--border-subtle)' }}
+        >
+          <Search className="w-5 h-5 mr-3" style={{ color: 'var(--text-tertiary)' }} />
           <input
             ref={inputRef}
             type="text"
             placeholder="Search nodes, incidents, or simulations..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 bg-transparent border-none text-white focus:outline-none placeholder-gray-500 text-sm"
+            className="flex-1 bg-transparent border-none focus:outline-none text-sm"
+            style={{
+              color: 'var(--foreground)',
+              caretColor: 'var(--blue-primary)',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.outlineColor = 'transparent';
+            }}
           />
           <button 
             onClick={onClose}
-            className="p-1 rounded bg-gray-800 text-gray-400 hover:text-white text-xs border border-gray-700"
+            className="p-1 rounded text-xs border transition-all duration-200"
+            style={{
+              backgroundColor: 'var(--surface-primary)',
+              borderColor: 'var(--border)',
+              color: 'var(--text-tertiary)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-tertiary)';
+              e.currentTarget.style.color = 'var(--text-secondary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-primary)';
+              e.currentTarget.style.color = 'var(--text-tertiary)';
+            }}
           >
             ESC
           </button>
@@ -76,26 +104,37 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
 
         <div className="max-h-[60vh] overflow-y-auto p-2">
           {search === '' && (
-            <div className="p-4 text-center text-sm text-gray-500">
+            <div className="p-4 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
               Type to search...
             </div>
           )}
 
           {search !== '' && filteredNodes.length > 0 && (
             <div className="mb-4">
-              <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Nodes</h3>
+              <h3 className="px-3 text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-muted)' }}>Nodes</h3>
               <div className="flex flex-col gap-1">
                 {filteredNodes.map(node => (
                   <button
                     key={node.id}
                     onClick={() => handleSelectNode(node.id)}
-                    className="flex items-center justify-between w-full px-3 py-2 text-left rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white group transition-colors"
+                    className="flex items-center justify-between w-full px-3 py-2 text-left rounded-md transition-colors duration-200 group"
+                    style={{
+                      color: 'var(--text-secondary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--surface-tertiary)';
+                      e.currentTarget.style.color = 'var(--foreground)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
                   >
                     <div className="flex items-center gap-3">
-                      <MapPin className="w-4 h-4 text-gray-500 group-hover:text-blue-400" />
+                      <MapPin className="w-4 h-4" style={{ color: 'var(--text-tertiary)' }} />
                       <span className="text-sm font-medium">{node.data.name}</span>
                     </div>
-                    <span className="text-xs text-gray-600 font-mono">{node.id}</span>
+                    <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>{node.id}</span>
                   </button>
                 ))}
               </div>
@@ -104,19 +143,30 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
 
           {search !== '' && filteredIncidents.length > 0 && (
             <div className="mb-4">
-              <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Active Incidents</h3>
+              <h3 className="px-3 text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-muted)' }}>Active Incidents</h3>
               <div className="flex flex-col gap-1">
                 {filteredIncidents.map(inc => (
                   <button
                     key={inc.id}
                     onClick={() => handleSelectNode(inc.node)}
-                    className="flex items-center justify-between w-full px-3 py-2 text-left rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white group transition-colors"
+                    className="flex items-center justify-between w-full px-3 py-2 text-left rounded-md transition-colors duration-200 group"
+                    style={{
+                      color: 'var(--text-secondary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--surface-tertiary)';
+                      e.currentTarget.style.color = 'var(--foreground)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
                   >
                     <div className="flex items-center gap-3">
-                      <AlertCircle className="w-4 h-4 text-red-500 group-hover:text-red-400" />
+                      <AlertCircle className="w-4 h-4" style={{ color: 'var(--red-incident)' }} />
                       <span className="text-sm font-medium">{inc.name}</span>
                     </div>
-                    <span className="text-xs text-gray-600 font-mono">{inc.id}</span>
+                    <span className="text-xs font-mono" style={{ color: 'var(--text-muted)' }}>{inc.id}</span>
                   </button>
                 ))}
               </div>
@@ -124,7 +174,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
           )}
           
           {search !== '' && filteredNodes.length === 0 && filteredIncidents.length === 0 && (
-            <div className="p-4 text-center text-sm text-gray-500">
+            <div className="p-4 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
               No results found for "{search}"
             </div>
           )}

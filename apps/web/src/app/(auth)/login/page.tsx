@@ -28,31 +28,72 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-950 px-4">
-      <div className="w-full max-w-md rounded-2xl border border-gray-800 bg-gray-900 p-8 shadow-xl">
+    <div 
+      className="flex min-h-screen items-center justify-center px-4"
+      style={{ backgroundColor: 'var(--navy-950)' }}
+    >
+      <div 
+        className="w-full max-w-md rounded-lg p-8 border"
+        style={{
+          backgroundColor: 'var(--surface-secondary)',
+          borderColor: 'var(--border)',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+        }}
+      >
+        {/* Logo & Header */}
         <div className="flex flex-col items-center mb-8">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-500/20">
+          <div 
+            className="mb-4 flex h-16 w-16 items-center justify-center rounded-md"
+            style={{ backgroundColor: 'var(--blue-primary)' }}
+          >
             <span className="text-3xl font-bold text-white">S</span>
           </div>
-          <h1 className="text-2xl font-bold text-white text-center">Stadium Stan</h1>
-          <p className="text-gray-400 mt-2 text-sm text-center">Operations Command Center</p>
+          <h1 className="text-2xl font-semibold text-center" style={{ color: 'var(--foreground)' }}>
+            Stadium Stan
+          </h1>
+          <p className="mt-2 text-sm text-center" style={{ color: 'var(--text-tertiary)' }}>
+            Operations Command Center
+          </p>
         </div>
 
+        {/* Login Form */}
         <form onSubmit={handleLogin} className="flex flex-col gap-5">
           {error && (
-            <div className="flex items-center gap-2 rounded-lg bg-red-500/10 p-3 text-sm text-red-400 border border-red-500/20">
-              <ShieldAlert className="h-4 w-4" />
+            <div 
+              className="flex items-center gap-2 rounded-md p-3 text-sm border"
+              style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                borderColor: 'rgba(239, 68, 68, 0.3)',
+                color: 'var(--red-incident)',
+              }}
+            >
+              <ShieldAlert className="h-4 w-4 shrink-0" />
               {error}
             </div>
           )}
           
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-300">Email Address</label>
+            <label className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
+              Email Address
+            </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-lg border border-gray-700 bg-gray-950 px-4 py-2.5 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
+              className="rounded-md border px-4 py-2.5 text-sm transition-colors focus:outline-none"
+              style={{
+                backgroundColor: 'var(--surface-primary)',
+                borderColor: 'var(--border)',
+                color: 'var(--foreground)',
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = 'var(--blue-primary)';
+                e.currentTarget.style.boxShadow = '0 0 0 2px rgba(0, 102, 255, 0.1)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
               placeholder="Enter your email"
               required
             />
@@ -61,22 +102,61 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="mt-2 flex w-full items-center justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-2 flex w-full items-center justify-center rounded-md px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200"
+            style={{
+              backgroundColor: isLoading ? 'rgba(0, 102, 255, 0.6)' : 'var(--blue-primary)',
+              opacity: isLoading ? 0.7 : 1,
+            }}
+            onMouseEnter={(e) => {
+              if (!isLoading) e.currentTarget.style.opacity = '0.9';
+            }}
+            onMouseLeave={(e) => {
+              if (!isLoading) e.currentTarget.style.opacity = '1';
+            }}
           >
             {isLoading ? 'Authenticating...' : 'Sign In'}
           </button>
         </form>
 
-        <div className="mt-6 rounded-lg border border-blue-900/50 bg-blue-900/20 p-4 flex gap-3">
-          <Info className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
-          <div className="text-sm text-blue-200">
-            <p className="font-semibold mb-1">Demo Credentials</p>
-            <p>Manager: <span className="font-mono bg-blue-950/50 px-1 py-0.5 rounded text-blue-300">manager@stadiumstan.demo</span></p>
+        {/* Demo Credentials Info */}
+        <div 
+          className="mt-6 rounded-md p-4 flex gap-3 border"
+          style={{
+            backgroundColor: 'rgba(0, 102, 255, 0.08)',
+            borderColor: 'rgba(0, 102, 255, 0.3)',
+          }}
+        >
+          <Info className="h-5 w-5 shrink-0 mt-0.5" style={{ color: 'var(--blue-primary)' }} />
+          <div className="text-sm">
+            <p className="font-semibold mb-1" style={{ color: 'var(--foreground)' }}>Demo Credentials</p>
+            <p style={{ color: 'var(--text-secondary)' }}>
+              Manager:{' '}
+              <span 
+                className="font-mono px-1.5 py-0.5 rounded text-xs"
+                style={{
+                  backgroundColor: 'var(--surface-primary)',
+                  color: 'var(--blue-primary)',
+                }}
+              >
+                manager@stadiumstan.demo
+              </span>
+            </p>
           </div>
         </div>
 
+        {/* Footer Link */}
         <div className="mt-6 text-center">
-          <Link href="/" className="text-gray-500 hover:text-white text-sm transition-colors">
+          <Link 
+            href="/" 
+            className="text-xs transition-colors duration-200"
+            style={{ color: 'var(--text-tertiary)' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--text-secondary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--text-tertiary)';
+            }}
+          >
             Return to Landing Page
           </Link>
         </div>

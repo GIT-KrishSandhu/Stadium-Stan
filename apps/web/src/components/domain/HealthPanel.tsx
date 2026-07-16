@@ -55,12 +55,12 @@ export function HealthPanel() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Connected': return 'bg-emerald-500';
-      case 'Degraded': return 'bg-yellow-500';
-      case 'Reconnecting': return 'bg-orange-500 animate-pulse';
-      case 'Connecting': return 'bg-blue-500 animate-pulse';
-      case 'Disconnected': return 'bg-red-500';
-      default: return 'bg-gray-500';
+      case 'Connected': return { bg: 'var(--green-success)', pulsing: false };
+      case 'Degraded': return { bg: 'var(--amber-warning)', pulsing: false };
+      case 'Reconnecting': return { bg: 'var(--amber-warning)', pulsing: true };
+      case 'Connecting': return { bg: 'var(--blue-primary)', pulsing: true };
+      case 'Disconnected': return { bg: 'var(--red-incident)', pulsing: false };
+      default: return { bg: 'var(--text-muted)', pulsing: false };
     }
   };
 
@@ -73,24 +73,43 @@ export function HealthPanel() {
   ];
 
   return (
-    <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-6 shadow-sm backdrop-blur-sm">
-      <h3 className="text-lg font-semibold text-white mb-4">System Health</h3>
+    <div 
+      className="rounded-lg p-6 border"
+      style={{
+        backgroundColor: 'var(--surface-secondary)',
+        borderColor: 'var(--border)',
+      }}
+    >
+      <h3 className="text-base font-semibold mb-4" style={{ color: 'var(--foreground)' }}>System Health</h3>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        {services.map((svc) => (
-          <div key={svc.name} className="flex flex-col items-center p-4 rounded-lg bg-gray-950 border border-gray-800 gap-3">
-            <div className="relative">
-              <svc.icon className="h-6 w-6 text-gray-400" />
-              <span className={cn(
-                "absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-gray-950",
-                getStatusColor(svc.status)
-              )} />
+        {services.map((svc) => {
+          const statusColor = getStatusColor(svc.status);
+          return (
+            <div 
+              key={svc.name} 
+              className="flex flex-col items-center p-4 rounded-md border gap-3"
+              style={{
+                backgroundColor: 'var(--surface-primary)',
+                borderColor: 'var(--border)',
+              }}
+            >
+              <div className="relative">
+                <svc.icon className="h-6 w-6" style={{ color: 'var(--text-tertiary)' }} />
+                <span 
+                  className={cn("absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2", statusColor.pulsing ? "animate-pulse" : "")}
+                  style={{
+                    backgroundColor: statusColor.bg,
+                    borderColor: 'var(--surface-primary)',
+                  }}
+                />
+              </div>
+              <div className="text-center">
+                <div className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>{svc.name}</div>
+                <div className="text-xs" style={{ color: 'var(--text-muted)' }}>{svc.status}</div>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-sm font-medium text-gray-200">{svc.name}</div>
-              <div className="text-xs text-gray-500">{svc.status}</div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

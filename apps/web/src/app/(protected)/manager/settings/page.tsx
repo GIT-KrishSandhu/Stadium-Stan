@@ -113,33 +113,51 @@ export default function SettingsPage() {
   return (
     <div className="flex flex-col h-full min-h-0 gap-6 pb-12">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Settings2 className="w-6 h-6 text-blue-500" /> Platform Settings & Diagnostics
+        <h1 className="text-2xl font-bold flex items-center gap-2" style={{ color: 'var(--foreground)' }}>
+          <Settings2 className="w-6 h-6" style={{ color: 'var(--blue-primary)' }} /> Platform Settings & Diagnostics
         </h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {/* User Profile */}
-        <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 flex flex-col gap-5 shadow-lg">
-          <div className="flex items-center gap-3 border-b border-gray-800 pb-4">
-            <UserIcon className="w-5 h-5 text-blue-400" />
-            <h2 className="text-lg font-bold text-white">Active Profile</h2>
+        <div 
+          className="rounded-lg p-6 flex flex-col gap-5 border"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <div 
+            className="flex items-center gap-3 border-b pb-4"
+            style={{
+              borderBottomColor: 'var(--border-subtle)',
+            }}
+          >
+            <UserIcon className="w-5 h-5" style={{ color: 'var(--blue-primary)' }} />
+            <h2 className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>Active Profile</h2>
           </div>
           
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <span className="text-xs text-gray-500">EMAIL ADDRESS</span>
-              <span className="text-sm font-semibold text-gray-200">{user?.email || 'manager@stadiumstan.demo'}</span>
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>EMAIL ADDRESS</span>
+              <span className="text-sm font-semibold" style={{ color: 'var(--text-secondary)' }}>{user?.email || 'manager@stadiumstan.demo'}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-xs text-gray-500">ASSIGNED ROLE</span>
-              <span className="text-xs font-bold bg-blue-900/30 text-blue-400 border border-blue-900/50 px-2 py-0.5 rounded uppercase w-max">
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>ASSIGNED ROLE</span>
+              <span 
+                className="text-xs font-bold px-2 py-0.5 rounded uppercase w-max border"
+                style={{
+                  backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                  color: 'var(--blue-primary)',
+                  borderColor: 'rgba(0, 102, 255, 0.2)',
+                }}
+              >
                 {user?.role || 'manager'}
               </span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-xs text-gray-500">SESSION TOKEN</span>
-              <span className="text-[10px] font-mono text-gray-400 break-all select-all">
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>SESSION TOKEN</span>
+              <span className="text-[10px] font-mono break-all select-all" style={{ color: 'var(--text-tertiary)' }}>
                 {useAuthStore.getState().token || 'fake-jwt-token-for-manager'}
               </span>
             </div>
@@ -147,84 +165,133 @@ export default function SettingsPage() {
         </div>
 
         {/* Persona Preferences */}
-        <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 flex flex-col gap-5 shadow-lg">
-          <div className="flex items-center gap-3 border-b border-gray-800 pb-4">
-            <Bell className="w-5 h-5 text-purple-400" />
-            <h2 className="text-lg font-bold text-white">Notification Scopes</h2>
+        <div 
+          className="rounded-lg p-6 flex flex-col gap-5 border"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <div 
+            className="flex items-center gap-3 border-b pb-4"
+            style={{
+              borderBottomColor: 'var(--border-subtle)',
+            }}
+          >
+            <Bell className="w-5 h-5" style={{ color: 'var(--purple-accent)' }} />
+            <h2 className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>Notification Scopes</h2>
           </div>
           
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300">Push Live Notifications</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Push Live Notifications</span>
               <button 
                 onClick={() => setPushPref(!pushPref)}
-                className={cn(
-                  "w-10 h-5 rounded-full flex items-center px-1 transition-colors duration-200 focus:outline-none",
-                  pushPref ? "bg-blue-600" : "bg-gray-800"
-                )}
+                className="w-10 h-5 rounded-full flex items-center px-1 transition-colors duration-200 focus:outline-none"
+                style={{
+                  backgroundColor: pushPref ? 'var(--blue-primary)' : 'var(--surface-tertiary)',
+                }}
               >
-                <div className={cn("w-4 h-4 bg-white rounded-full transition-transform duration-200", pushPref && "translate-x-5")}></div>
+                <div 
+                  className="w-4 h-4 bg-white rounded-full transition-transform duration-200"
+                  style={{
+                    transform: pushPref ? 'translateX(1.25rem)' : 'translateX(0)',
+                  }}
+                />
               </button>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300">SMS Critical Dispatch Alerts</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>SMS Critical Dispatch Alerts</span>
               <button 
                 onClick={() => setSmsPref(!smsPref)}
-                className={cn(
-                  "w-10 h-5 rounded-full flex items-center px-1 transition-colors duration-200 focus:outline-none",
-                  smsPref ? "bg-blue-600" : "bg-gray-800"
-                )}
+                className="w-10 h-5 rounded-full flex items-center px-1 transition-colors duration-200 focus:outline-none"
+                style={{
+                  backgroundColor: smsPref ? 'var(--blue-primary)' : 'var(--surface-tertiary)',
+                }}
               >
-                <div className={cn("w-4 h-4 bg-white rounded-full transition-transform duration-200", smsPref && "translate-x-5")}></div>
+                <div 
+                  className="w-4 h-4 bg-white rounded-full transition-transform duration-200"
+                  style={{
+                    transform: smsPref ? 'translateX(1.25rem)' : 'translateX(0)',
+                  }}
+                />
               </button>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300">Email System Summaries</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Email System Summaries</span>
               <button 
                 onClick={() => setEmailPref(!emailPref)}
-                className={cn(
-                  "w-10 h-5 rounded-full flex items-center px-1 transition-colors duration-200 focus:outline-none",
-                  emailPref ? "bg-blue-600" : "bg-gray-800"
-                )}
+                className="w-10 h-5 rounded-full flex items-center px-1 transition-colors duration-200 focus:outline-none"
+                style={{
+                  backgroundColor: emailPref ? 'var(--blue-primary)' : 'var(--surface-tertiary)',
+                }}
               >
-                <div className={cn("w-4 h-4 bg-white rounded-full transition-transform duration-200", emailPref && "translate-x-5")}></div>
+                <div 
+                  className="w-4 h-4 bg-white rounded-full transition-transform duration-200"
+                  style={{
+                    transform: emailPref ? 'translateX(1.25rem)' : 'translateX(0)',
+                  }}
+                />
               </button>
             </div>
           </div>
         </div>
 
         {/* Look and Feel */}
-        <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 flex flex-col gap-5 shadow-lg">
-          <div className="flex items-center gap-3 border-b border-gray-800 pb-4">
-            <Sun className="w-5 h-5 text-orange-400" />
-            <h2 className="text-lg font-bold text-white">Interface Customization</h2>
+        <div 
+          className="rounded-lg p-6 flex flex-col gap-5 border"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <div 
+            className="flex items-center gap-3 border-b pb-4"
+            style={{
+              borderBottomColor: 'var(--border-subtle)',
+            }}
+          >
+            <Sun className="w-5 h-5" style={{ color: 'var(--amber-warning)' }} />
+            <h2 className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>Interface Customization</h2>
           </div>
           
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300">Color Palette Theme</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Color Palette Theme</span>
               <button 
                 onClick={toggleTheme}
-                className="flex items-center gap-1.5 px-3 py-1 bg-gray-900 border border-gray-700 hover:border-gray-500 rounded text-xs text-white transition-all font-medium"
+                className="flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium border transition-all"
+                style={{
+                  backgroundColor: 'var(--surface-primary)',
+                  borderColor: 'var(--border)',
+                  color: 'var(--foreground)',
+                }}
               >
                 {theme === 'dark' ? (
                   <>
-                    <Moon className="w-3.5 h-3.5 text-blue-400" /> Dark Mode
+                    <Moon className="w-3.5 h-3.5" style={{ color: 'var(--blue-primary)' }} /> Dark Mode
                   </>
                 ) : (
                   <>
-                    <Sun className="w-3.5 h-3.5 text-yellow-500" /> Light Mode
+                    <Sun className="w-3.5 h-3.5" style={{ color: 'var(--amber-warning)' }} /> Light Mode
                   </>
                 )}
               </button>
             </div>
             
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300 flex items-center gap-1.5"><Type className="w-4 h-4 text-gray-400" /> Accessibility Sizing</span>
+              <span className="text-sm flex items-center gap-1.5" style={{ color: 'var(--text-secondary)' }}>
+                <Type className="w-4 h-4" style={{ color: 'var(--text-muted)' }} /> Accessibility Sizing
+              </span>
               <select 
                 value={fontSize}
                 onChange={(e) => handleFontSizeChange(e.target.value as any)}
-                className="bg-gray-900 border border-gray-700 rounded px-2.5 py-1 text-xs text-white outline-none focus:border-blue-500"
+                className="rounded px-2.5 py-1 text-xs outline-none border transition-colors"
+                style={{
+                  backgroundColor: 'var(--surface-primary)',
+                  borderColor: 'var(--border)',
+                  color: 'var(--foreground)',
+                }}
               >
                 <option value="normal">Normal Text</option>
                 <option value="large">Large Text</option>
@@ -232,16 +299,21 @@ export default function SettingsPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-300">Primary Language</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Primary Language</span>
               <div className="flex items-center gap-1.5">
-                <Languages className="w-4 h-4 text-gray-500" />
+                <Languages className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
                 <select 
                   value={language}
                   onChange={(e) => {
                     setLanguage(e.target.value as any);
                     localStorage.setItem('language', e.target.value);
                   }}
-                  className="bg-gray-900 border border-gray-700 rounded px-2.5 py-1 text-xs text-white outline-none focus:border-blue-500"
+                  className="rounded px-2.5 py-1 text-xs outline-none border transition-colors"
+                  style={{
+                    backgroundColor: 'var(--surface-primary)',
+                    borderColor: 'var(--border)',
+                    color: 'var(--foreground)',
+                  }}
                 >
                   <option value="en">English (US)</option>
                   <option value="es">Español</option>
@@ -253,86 +325,153 @@ export default function SettingsPage() {
         </div>
 
         {/* Connection Diagnostics */}
-        <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 flex flex-col gap-5 md:col-span-2 shadow-lg">
-          <div className="flex items-center justify-between border-b border-gray-800 pb-4">
+        <div 
+          className="rounded-lg p-6 flex flex-col gap-5 md:col-span-2 border"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
+          <div 
+            className="flex items-center justify-between border-b pb-4"
+            style={{
+              borderBottomColor: 'var(--border-subtle)',
+            }}
+          >
             <div className="flex items-center gap-3">
-              <Radio className="w-5 h-5 text-emerald-400" />
-              <h2 className="text-lg font-bold text-white">Diagnostics & Telemetry Health</h2>
+              <Radio className="w-5 h-5" style={{ color: 'var(--green-success)' }} />
+              <h2 className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>Diagnostics & Telemetry Health</h2>
             </div>
             
             <button 
               onClick={() => checkHealth()} 
               disabled={isCheckingHealth}
-              className="p-1.5 hover:bg-gray-900 text-gray-400 hover:text-white rounded border border-gray-800 hover:border-gray-700 transition-colors disabled:opacity-50"
+              className="p-1.5 rounded border transition-all disabled:opacity-50"
+              style={{
+                borderColor: 'var(--border)',
+                color: 'var(--text-muted)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--surface-primary)';
+                e.currentTarget.style.color = 'var(--foreground)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = 'var(--text-muted)';
+              }}
             >
               <RefreshCw className={cn("w-4 h-4", isCheckingHealth && "animate-spin")} />
             </button>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-3 bg-gray-900/40 border border-gray-800/80 rounded-xl flex flex-col gap-2">
-              <span className="text-xs text-gray-400 font-bold tracking-wide uppercase">FASTAPI GATEWAY</span>
+            <div 
+              className="p-3 border rounded-lg flex flex-col gap-2"
+              style={{
+                backgroundColor: 'var(--surface-primary)',
+                borderColor: 'var(--border)',
+              }}
+            >
+              <span className="text-xs font-bold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>FASTAPI GATEWAY</span>
               <div className="flex items-center gap-2 mt-1">
-                <span className={cn(
-                  "w-2.5 h-2.5 rounded-full",
-                  healthData?.status === 'ok' ? "bg-emerald-500 animate-pulse" : "bg-red-500"
-                )} />
-                <span className="text-sm font-semibold text-white">
+                <span 
+                  className="w-2.5 h-2.5 rounded-full animate-pulse"
+                  style={{
+                    backgroundColor: healthData?.status === 'ok' ? 'var(--green-success)' : 'var(--red-incident)',
+                  }}
+                />
+                <span className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
                   {healthData?.status === 'ok' ? 'Online (CORS standard)' : 'Offline / Degraded'}
                 </span>
               </div>
-              <span className="text-[10px] text-gray-500 block">BASE URL: http://localhost:8000/api/v1</span>
+              <span className="text-[10px] block" style={{ color: 'var(--text-tertiary)' }}>BASE URL: http://localhost:8000/api/v1</span>
             </div>
 
-            <div className="p-3 bg-gray-900/40 border border-gray-800/80 rounded-xl flex flex-col gap-2">
-              <span className="text-xs text-gray-400 font-bold tracking-wide uppercase">POSTGRESQL DATABASE</span>
+            <div 
+              className="p-3 border rounded-lg flex flex-col gap-2"
+              style={{
+                backgroundColor: 'var(--surface-primary)',
+                borderColor: 'var(--border)',
+              }}
+            >
+              <span className="text-xs font-bold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>POSTGRESQL DATABASE</span>
               <div className="flex items-center gap-2 mt-1">
-                <span className={cn(
-                  "w-2.5 h-2.5 rounded-full",
-                  healthData?.database === 'connected' ? "bg-emerald-500 animate-pulse" : "bg-red-500"
-                )} />
-                <span className="text-sm font-semibold text-white">
+                <span 
+                  className="w-2.5 h-2.5 rounded-full animate-pulse"
+                  style={{
+                    backgroundColor: healthData?.database === 'connected' ? 'var(--green-success)' : 'var(--red-incident)',
+                  }}
+                />
+                <span className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
                   {healthData?.database === 'connected' ? 'Connected (Port 5433)' : 'Operational Failure'}
                 </span>
               </div>
-              <span className="text-[10px] text-gray-500 block">DB NAME: stadium_stan</span>
+              <span className="text-[10px] block" style={{ color: 'var(--text-tertiary)' }}>DB NAME: stadium_stan</span>
             </div>
 
-            <div className="p-3 bg-gray-900/40 border border-gray-800/80 rounded-xl flex flex-col gap-2">
-              <span className="text-xs text-gray-400 font-bold tracking-wide uppercase">WEBSOCKET PIPELINE</span>
+            <div 
+              className="p-3 border rounded-lg flex flex-col gap-2"
+              style={{
+                backgroundColor: 'var(--surface-primary)',
+                borderColor: 'var(--border)',
+              }}
+            >
+              <span className="text-xs font-bold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>WEBSOCKET PIPELINE</span>
               <div className="flex items-center gap-2 mt-1">
-                <span className={cn(
-                  "w-2.5 h-2.5 rounded-full",
-                  isConnected ? "bg-emerald-500 animate-pulse" : "bg-red-500"
-                )} />
-                <span className="text-sm font-semibold text-white">
+                <span 
+                  className="w-2.5 h-2.5 rounded-full animate-pulse"
+                  style={{
+                    backgroundColor: isConnected ? 'var(--green-success)' : 'var(--red-incident)',
+                  }}
+                />
+                <span className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
                   {isConnected ? 'Connected' : `Reconnecting (Delay: ${reconnectAttempts * 2}s)`}
                 </span>
               </div>
-              <span className="text-[10px] text-gray-500 block">
+              <span className="text-[10px] block" style={{ color: 'var(--text-tertiary)' }}>
                 Last Message: {lastMessageTime ? new Date(lastMessageTime).toLocaleTimeString() : 'No messages yet'}
               </span>
             </div>
 
-            <div className="p-3 bg-gray-900/40 border border-gray-800/80 rounded-xl flex flex-col gap-2">
-              <span className="text-xs text-gray-400 font-bold tracking-wide uppercase">LANGGRAPH AGENTS</span>
+            <div 
+              className="p-3 border rounded-lg flex flex-col gap-2"
+              style={{
+                backgroundColor: 'var(--surface-primary)',
+                borderColor: 'var(--border)',
+              }}
+            >
+              <span className="text-xs font-bold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>LANGGRAPH AGENTS</span>
               <div className="flex items-center gap-2 mt-1">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-sm font-semibold text-white">Stateless (Active)</span>
+                <span 
+                  className="w-2.5 h-2.5 rounded-full animate-pulse"
+                  style={{ backgroundColor: 'var(--green-success)' }}
+                />
+                <span className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>Stateless (Active)</span>
               </div>
-              <span className="text-[10px] text-gray-500 block">WORKFLOWS: crowd, incident, routing</span>
+              <span className="text-[10px] block" style={{ color: 'var(--text-tertiary)' }}>WORKFLOWS: crowd, incident, routing</span>
             </div>
           </div>
         </div>
 
         {/* Demo Operations Reset */}
-        <div className="bg-gray-950 border border-gray-800 rounded-xl p-6 flex flex-col justify-between shadow-lg">
+        <div 
+          className="rounded-lg p-6 flex flex-col justify-between border"
+          style={{
+            backgroundColor: 'var(--surface-secondary)',
+            borderColor: 'var(--border)',
+          }}
+        >
           <div>
-            <div className="flex items-center gap-3 border-b border-gray-800 pb-4 mb-4">
-              <HardDrive className="w-5 h-5 text-red-400" />
-              <h2 className="text-lg font-bold text-white">Demo Control</h2>
+            <div 
+              className="flex items-center gap-3 border-b pb-4 mb-4"
+              style={{
+                borderBottomColor: 'var(--border-subtle)',
+              }}
+            >
+              <HardDrive className="w-5 h-5" style={{ color: 'var(--red-incident)' }} />
+              <h2 className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>Demo Control</h2>
             </div>
-            <p className="text-xs text-gray-400 leading-relaxed mb-4">
+            <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--text-tertiary)' }}>
               Resets the entire relational database state. All simulated incidents, volunteer assignments, response actions, and execution logs will be purged, and the canonical MetLife Stadium topology will be freshly re-seeded.
             </p>
           </div>
@@ -340,7 +479,20 @@ export default function SettingsPage() {
           <button 
             onClick={() => resetDbMutation.mutate()}
             disabled={resetDbMutation.isPending}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-900/50 hover:border-transparent rounded-xl font-bold text-sm transition-all shadow-lg"
+            className="w-full flex items-center justify-center gap-2 py-3 border rounded-lg font-bold text-sm transition-all"
+            style={{
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              borderColor: 'rgba(239, 68, 68, 0.2)',
+              color: 'var(--red-incident)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--red-incident)';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+              e.currentTarget.style.color = 'var(--red-incident)';
+            }}
           >
             {resetDbMutation.isPending ? (
               <>

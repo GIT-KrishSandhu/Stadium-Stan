@@ -1,8 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base Colors - Deep Navy & Graphite */
+  --navy-950: #0f1621;
+  --navy-900: #1a2332;
+  --graphite-800: #2d3748;
+  --graphite-700: #3a4556;
+  --graphite-600: #4a5568;
+  --graphite-500: #5a6a7a;
+  --graphite-400: #7a8a9a;
+  --graphite-300: #9aa9ba;
+  --graphite-200: #c4cdd5;
+  --graphite-100: #e8eef5;
+  --white: #ffffff;
+
+  /* Semantic Colors */
+  --blue-primary: #0066ff;
+  --blue-600: #1a7eff;
+  --blue-500: #3391ff;
+  --green-success: #10b981;
+  --amber-warning: #f59e0b;
+  --red-incident: #ef4444;
+  --purple-ai: #a78bfa;
+
+  /* Surface Colors */
+  --background: var(--navy-950);
+  --surface-primary: var(--navy-900);
+  --surface-secondary: var(--graphite-800);
+  --surface-tertiary: var(--graphite-700);
+  --border: var(--graphite-700);
+  --border-subtle: var(--graphite-800);
+
+  /* Text Colors */
+  --foreground: var(--graphite-100);
+  --text-secondary: var(--graphite-300);
+  --text-tertiary: var(--graphite-400);
+  --text-muted: var(--graphite-500);
+
+  /* Interactive States */
+  --hover-overlay: rgba(255, 255, 255, 0.05);
+  --focus-ring: var(--blue-primary);
+  --disabled: var(--graphite-500);
+
+  /* Stadium Accent Elements */
+  --field-line: rgba(0, 102, 255, 0.1);
+  --tactical-overlay: rgba(10, 185, 129, 0.08);
 }
 
 @theme inline {
@@ -12,15 +54,146 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Typography System */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+/* Semantic Text Styles */
+.text-primary {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Surface & Card Styling */
+.surface {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.surface-elevated {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.surface-interactive:hover {
+  background: var(--surface-tertiary);
+  border-color: var(--graphite-600);
+}
+
+/* Border Utilities */
+.border-subtle {
+  border-color: var(--border-subtle);
+}
+
+.border-line {
+  border-color: var(--border);
+}
+
+/* Stadium-Inspired Accents */
+.field-grid {
+  background-image: linear-gradient(
+    90deg,
+    var(--field-line) 1px,
+    transparent 1px
+  ),
+  linear-gradient(
+    0deg,
+    var(--field-line) 1px,
+    transparent 1px
+  );
+  background-size: 40px 40px;
+}
+
+.tactical-overlay {
+  background: linear-gradient(135deg, var(--tactical-overlay) 0%, transparent 100%);
+}
+
+/* Focus & Active States */
+.focus-ring {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.focus-ring-inner {
+  box-shadow: inset 0 0 0 2px var(--focus-ring);
+}
+
+/* Transitions & Animations */
+* {
+  @apply transition-colors duration-200;
+}
+
+button, a, [role="button"] {
+  @apply transition-all duration-200;
+}
+
+/* Smooth Panel Transitions */
+.panel-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Subtle Scale Animation */
+@keyframes subtle-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.hover-scale {
+  @apply hover:shadow-lg;
+}
+
+.hover-scale:hover {
+  transform: scale(1.01);
+}
+
+/* Stadium Lighting Effect - Subtle Glow */
+.stadium-accent {
+  position: relative;
+}
+
+.stadium-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 102, 255, 0.1) 0%,
+    transparent 50%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Responsive Design System */
+@media (max-width: 768px) {
+  :root {
+    --text-scale: 0.95;
+  }
 }
