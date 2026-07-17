@@ -2,19 +2,9 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Copy backend
-COPY apps/api/ ./apps/api/
+COPY . .
 
-# Copy shared packages
-COPY packages/ ./packages/
-
-# Install dependencies
 RUN pip install --no-cache-dir -r apps/api/requirements.txt
-
-# Allow imports like `import packages.*`
-ENV PYTHONPATH=/app
-
-EXPOSE 8080
 
 WORKDIR /app/apps/api
 
