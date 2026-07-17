@@ -48,7 +48,7 @@ export default function VolunteerLoginPage() {
               {error}
             </div>
           )}
-          
+
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-gray-300">Volunteer Email</label>
             <input

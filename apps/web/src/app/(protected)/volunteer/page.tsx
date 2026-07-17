@@ -32,7 +32,7 @@ export default function VolunteerDashboard() {
   });
   const nodes = twinData?.nodes || [];
 
-  const activeAssignment = assignments?.find((a: any) => 
+  const activeAssignment = assignments?.find((a: any) =>
     ['pending', 'accepted', 'en_route', 'at_location'].includes(a.status)
   );
 
@@ -56,7 +56,7 @@ export default function VolunteerDashboard() {
 
   const handleNextStep = () => {
     if (!activeAssignment) return;
-    
+
     let nextStatus = '';
     switch (activeAssignment.status) {
       case 'pending': nextStatus = 'accepted'; break;
@@ -64,7 +64,7 @@ export default function VolunteerDashboard() {
       case 'en_route': nextStatus = 'at_location'; break;
       case 'at_location': nextStatus = 'completed'; break;
     }
-    
+
     if (nextStatus) {
       updateAssignmentMutation.mutate({ id: activeAssignment.id, newStatus: nextStatus });
       // Update global volunteer status automatically to match assignment
@@ -88,7 +88,7 @@ export default function VolunteerDashboard() {
 
   return (
     <div className="flex flex-col gap-6 w-full pb-10">
-      
+
       {/* Current Status Banner */}
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex items-center justify-between shadow-lg">
         <div className="flex flex-col">
@@ -97,16 +97,16 @@ export default function VolunteerDashboard() {
             <span className={cn(
               "w-3 h-3 rounded-full animate-pulse",
               status === 'available' ? "bg-emerald-500" :
-              status === 'busy' ? "bg-orange-500" :
-              status === 'break' ? "bg-blue-500" : "bg-gray-500"
+                status === 'busy' ? "bg-orange-500" :
+                  status === 'break' ? "bg-blue-500" : "bg-gray-500"
             )}></span>
             <span className="font-bold text-white capitalize text-lg">{status}</span>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
-          <select 
-            value={status} 
+          <select
+            value={status}
             onChange={(e) => updateStatusMutation.mutate(e.target.value)}
             className="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block p-2"
           >
@@ -125,7 +125,7 @@ export default function VolunteerDashboard() {
       ) : activeAssignment ? (
         <div className="bg-gray-900 border-2 border-emerald-900/50 rounded-xl overflow-hidden shadow-2xl relative">
           <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
-          
+
           <div className="p-5 border-b border-gray-800 bg-gray-800/30">
             <div className="flex justify-between items-start mb-2">
               <span className="bg-emerald-900/40 text-emerald-400 text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Active Assignment</span>
@@ -134,7 +134,7 @@ export default function VolunteerDashboard() {
             <h2 className="text-xl font-bold text-white capitalize">{activeAssignment.action_details.replace(/_/g, ' ')}</h2>
             {activeAssignment.incident_details && (
               <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
-                <AlertCircle className="w-4 h-4" /> 
+                <AlertCircle className="w-4 h-4" />
                 Related to: {activeAssignment.incident_details}
               </p>
             )}
@@ -160,7 +160,7 @@ export default function VolunteerDashboard() {
               </div>
             </div>
 
-            <button 
+            <button
               onClick={handleNextStep}
               disabled={updateAssignmentMutation.isPending}
               className={cn(
@@ -191,15 +191,15 @@ export default function VolunteerDashboard() {
       {/* Quick Actions */}
       <h3 className="text-gray-400 font-bold uppercase tracking-wider text-xs px-2 mt-4">Quick Actions</h3>
       <div className="grid grid-cols-2 gap-4">
-        <button 
+        <button
           onClick={() => setShowIncidentModal(true)}
           className="bg-red-900/20 border border-red-900/50 hover:bg-red-900/40 rounded-xl p-4 flex flex-col items-center justify-center gap-3 transition-colors text-red-400"
         >
           <ShieldAlert className="w-8 h-8" />
           <span className="font-bold text-sm">Report Incident</span>
         </button>
-        
-        <button 
+
+        <button
           onClick={() => {
             // Check in locally, maybe updates context
             setLocation(activeAssignment?.location_node_id || "gate-a");
@@ -275,12 +275,12 @@ function IncidentModal({ onClose }: { onClose: () => void }) {
           </div>
           <button onClick={onClose} className="text-gray-400 hover:text-white">✕</button>
         </div>
-        
+
         <div className="p-5 flex flex-col gap-4">
           <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Type of Incident</label>
-            <select 
-              value={type} 
+            <select
+              value={type}
               onChange={e => setType(e.target.value)}
               className="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-white text-sm focus:ring-red-500 focus:border-red-500"
             >
@@ -290,21 +290,21 @@ function IncidentModal({ onClose }: { onClose: () => void }) {
               <option value="equipment_failure">Equipment Failure</option>
             </select>
           </div>
-          
+
           <div className="relative">
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Location Node</label>
-            <div 
+            <div
               onClick={() => setIsOpen(!isOpen)}
               className="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-white text-sm focus:ring-red-500 focus:border-red-500 cursor-pointer flex justify-between items-center"
             >
               <span className="truncate">{selectedNodeObj ? `${selectedNodeObj.name} (${selectedNodeObj.node_type})` : 'Select a node...'}</span>
               <span className="text-gray-500 text-xs">▼</span>
             </div>
-            
+
             {isOpen && (
               <div className="absolute left-0 right-0 mt-1 bg-gray-900 border border-gray-800 rounded-lg shadow-2xl z-50 max-h-60 overflow-y-auto p-2 flex flex-col gap-1">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   placeholder="Search node..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
@@ -337,7 +337,7 @@ function IncidentModal({ onClose }: { onClose: () => void }) {
             )}
           </div>
 
-          <button 
+          <button
             onClick={() => mutate()}
             disabled={isPending || !node}
             className="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 mt-2 shadow-lg shadow-red-900/20 disabled:opacity-50"

@@ -28,7 +28,7 @@ export default function VolunteerLayout({ children }: { children: React.ReactNod
     // Check if volunteer is authenticated
     const authStatus = localStorage.getItem('stadium_stan_volunteer');
     const hasStoreAuth = token && user?.role === 'volunteer';
-    
+
     if (authStatus !== 'authenticated' && !hasStoreAuth) {
       router.push('/volunteer-login');
     } else {
@@ -51,7 +51,7 @@ export default function VolunteerLayout({ children }: { children: React.ReactNod
             <span className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Volunteer Ops</span>
           </div>
         </Link>
-        
+
         <div className="flex items-center gap-3">
           <NotificationCenter />
           <div className="h-8 w-8 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center">
@@ -66,7 +66,7 @@ export default function VolunteerLayout({ children }: { children: React.ReactNod
           </button>
         </div>
       </div>
-      
+
       {/* Main Content Area */}
       <main className="flex-1 bg-black p-4 md:p-6 pb-20">
         <div className="max-w-3xl mx-auto">

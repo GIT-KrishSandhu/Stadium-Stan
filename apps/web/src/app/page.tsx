@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-  ShieldAlert, Shield, Users, Activity, Zap, Cpu, 
+import {
+  ShieldAlert, Shield, Users, Activity, Zap, Cpu,
   MapPin, CheckCircle2, Server, PlayCircle, Network, ArrowRight
 } from 'lucide-react';
 import { cn } from '../../src/lib/utils';
@@ -13,7 +13,7 @@ export default function LandingPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-950 text-white overflow-y-auto">
-      
+
       {/* Background Glows */}
       <div className="fixed top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -40,7 +40,7 @@ export default function LandingPage() {
 
       {/* Main Hero Container */}
       <main className="flex-1 max-w-7xl mx-auto px-6 sm:px-12 py-12 flex flex-col gap-16 relative z-10 w-full">
-        
+
         {/* Title Hero Section */}
         <section className="text-center flex flex-col items-center gap-5 max-w-3xl mx-auto">
           <span className="text-xs font-bold font-mono text-blue-400 bg-blue-950/40 border border-blue-900 px-3 py-1 rounded-full uppercase tracking-wider">
@@ -68,7 +68,7 @@ export default function LandingPage() {
                 Access interactive stadium maps, live queue wait times, automated gates recommendation, safest accessible routing, and submit assistance emergency requests directly.
               </p>
             </div>
-            <Link 
+            <Link
               href="/fan"
               className="mt-4 w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-900/20"
             >
@@ -88,7 +88,7 @@ export default function LandingPage() {
                 Field staff operational cockpit. Report on-the-ground incidents, track dynamic checklist assignments, inspect digital twin zones, and follow SOP guidelines.
               </p>
             </div>
-            <Link 
+            <Link
               href="/volunteer-login"
               className="mt-4 w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-900/20"
             >
@@ -108,7 +108,7 @@ export default function LandingPage() {
                 The operations core. Review AI incident recommendations, trigger crowd congestion what-if simulations, inspect connection diagnostics, and reseed demo telemetry database.
               </p>
             </div>
-            <Link 
+            <Link
               href="/login"
               className="mt-4 w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-purple-900/20"
             >
@@ -120,19 +120,19 @@ export default function LandingPage() {
         {/* Tabbed Interactive Information Area */}
         <section className="bg-gray-900/20 border border-gray-800 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
           <div className="flex border-b border-gray-800 pb-3 mb-6 gap-6">
-            <button 
+            <button
               onClick={() => setActiveTab('overview')}
               className={cn("text-sm font-bold uppercase tracking-wider pb-2 border-b-2 transition-all", activeTab === 'overview' ? 'border-purple-500 text-purple-400' : 'border-transparent text-gray-400 hover:text-white')}
             >
               Platform Overview
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('scenario')}
               className={cn("text-sm font-bold uppercase tracking-wider pb-2 border-b-2 transition-all", activeTab === 'scenario' ? 'border-purple-500 text-purple-400' : 'border-transparent text-gray-400 hover:text-white')}
             >
               E2E Demo Walkthrough
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('stack')}
               className={cn("text-sm font-bold uppercase tracking-wider pb-2 border-b-2 transition-all", activeTab === 'stack' ? 'border-purple-500 text-purple-400' : 'border-transparent text-gray-400 hover:text-white')}
             >
@@ -219,28 +219,28 @@ export default function LandingPage() {
             <h3 className="text-xl font-bold text-white">Live Digital Twin Preview</h3>
             <p className="text-xs text-gray-400">Topological view of MetLife Stadium live nodes and risk telemetry mapping.</p>
           </div>
-          
+
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 items-center justify-center p-6 bg-gray-950/80 rounded-2xl border border-gray-800/80">
             <div className="flex flex-col items-center gap-1.5 p-3 rounded-lg border border-emerald-500/30 bg-emerald-950/10 text-emerald-400 transition-all hover:scale-105">
               <Users className="w-5 h-5 text-emerald-400" />
               <span className="text-[10px] font-bold">Gate A</span>
               <span className="text-[9px] font-mono opacity-85">Low Risk</span>
             </div>
-            
+
             <div className="h-0.5 bg-gray-800 w-full hidden sm:block relative">
               <span className="absolute top-0 left-0 right-0 bottom-0 bg-blue-500/20 animate-pulse"></span>
             </div>
-            
+
             <div className="flex flex-col items-center gap-1.5 p-3 rounded-lg border border-yellow-500/30 bg-yellow-950/10 text-yellow-400 transition-all hover:scale-105">
               <Activity className="w-5 h-5 text-yellow-400 animate-pulse" />
               <span className="text-[10px] font-bold">Corridor 1</span>
               <span className="text-[9px] font-mono opacity-85">Mod Risk</span>
             </div>
-            
+
             <div className="h-0.5 bg-gray-800 w-full hidden sm:block relative">
               <span className="absolute top-0 left-0 right-0 bottom-0 bg-red-500/20 animate-pulse"></span>
             </div>
-            
+
             <div className="flex flex-col items-center gap-1.5 p-3 rounded-lg border border-red-500/30 bg-red-950/10 text-red-400 transition-all hover:scale-105 animate-pulse">
               <ShieldAlert className="w-5 h-5 text-red-400" />
               <span className="text-[10px] font-bold">Section 101</span>
